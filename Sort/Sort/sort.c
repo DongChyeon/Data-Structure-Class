@@ -8,6 +8,19 @@ void print_array(int* arr, int n) {
 	printf("\n");
 }
 
+// 삽입 정렬
+void insert_sort(int* arr, int n) {
+	for (int i = 1; i < n; i++) {
+		int key = arr[i];
+		int j = i - 1;
+		while (j >= 0 && arr[j] > key) {
+			arr[j + 1] = arr[j];
+			j--;
+		}	// 새로 삽입할 숫자가 앞 숫자보다 작을 경우 한칸씩 밀어서 삽입
+		arr[j + 1] = key;
+	}
+}
+
 // 버블 정렬
 void bubble_sort(int* arr, int n) {
 	int isSorted = 0;
@@ -27,10 +40,18 @@ void bubble_sort(int* arr, int n) {
 
 // 메인 함수
 int main() {
-	int arr[6] = { 1, 3, 4, 5, 9, 7 };
+	int arr[6] = { 1, 4, 3, 5, 9, 7 };
+
 	printf("정렬 전 -> ");
 	print_array(arr, 6);
+	// 삽입 정렬
+	printf("정렬 후 -> ");
+	insert_sort(arr, 6);
+	print_array(arr, 6);
 	
+	printf("정렬 전 -> ");
+	print_array(arr, 6);
+	// 버블 정렬
 	printf("정렬 후 -> ");
 	bubble_sort(arr, 6);
 	print_array(arr, 6);
