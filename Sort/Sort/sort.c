@@ -8,6 +8,21 @@ void print_array(int* arr, int n) {
 	printf("\n");
 }
 
+// 선택 정렬
+void selection_sort(int* arr, int n) {
+	for (int i = 0; i < n - 1; i++) {
+		int least = i;
+		for (int j = i + 1; j < n; i++) {
+			if (arr[j] < arr[least]) {
+				least = j;
+			}
+		}
+		int temp = arr[i];
+		arr[i] = arr[least];
+		arr[least] = temp;
+	}
+}
+
 // 삽입 정렬
 void insert_sort(int* arr, int n) {
 	for (int i = 1; i < n; i++) {
@@ -41,6 +56,13 @@ void bubble_sort(int* arr, int n) {
 // 메인 함수
 int main() {
 	int arr[6] = { 1, 4, 3, 5, 9, 7 };
+
+	printf("정렬 전 -> ");
+	print_array(arr, 6);
+	// 선택 정렬
+	printf("정렬 후 -> ");
+	insert_sort(arr, 6);
+	print_array(arr, 6);
 
 	printf("정렬 전 -> ");
 	print_array(arr, 6);
