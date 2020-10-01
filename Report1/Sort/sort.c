@@ -67,9 +67,13 @@ void bubble_sort(Node* node) {
     }
 }
 
+int mrand(int range){
+    return rand() % range;
+}
+
 // 랜덤한 수로 Node 채우기
 void fill_random_numbers(Node* node, int range) {
     for (int i = 0; i < node[0].size; i++) {
-        node[i].val = rand() % range;
+        node[i].val = mrand(range);
     }
 }

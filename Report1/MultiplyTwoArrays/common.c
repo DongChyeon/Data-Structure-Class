@@ -15,9 +15,9 @@ int **array(int rows, int cols){
 	int **arr;
 	int i;
 
-	arr = (int **) malloc( sizeof( int *) * rows );
+	arr = (int **) malloc(sizeof(int *) * rows);
 	for( i=0; i<rows; i++)
-	   arr[i] = (int *) malloc( sizeof( int ) * cols );
+	   arr[i] = (int *) malloc(sizeof(int) * cols);
 
 	return arr;
 }
@@ -26,7 +26,7 @@ int **array(int rows, int cols){
 int *vector(int rows){
 	int *vec;
 
-	vec = (int *) malloc( sizeof( int ) * rows );
+	vec = (int *) malloc(sizeof(int) * rows);
 
 	return vec;
 }
@@ -34,8 +34,9 @@ int *vector(int rows){
 // deallocate a 2-dimensional array with size rows x cols
 void freeNode(int **arr, int rows ){
 	int r, c;
-	for( r=0; r<rows; r++)
+	for( r=0; r<rows; r++) {
 	    freeVector( arr[r] );
+	}
 
 	free(arr);
 }
@@ -50,9 +51,10 @@ void printNode(int **arr, int rows, int cols, char *msg){
 	int r, c;
 
 	printf("%s\n", msg );
-	for(r=0; r<rows; r++){
-		for(c=0; c<cols; c++)
+	for(r=0; r<rows; r++) {
+		for(c=0; c<cols; c++) {
 		   printf("\t %d", arr[r][c]);
+		}
 		printf("\n");
 	}
 }
@@ -61,7 +63,7 @@ void printNode(int **arr, int rows, int cols, char *msg){
 void printVector(int *arr, int rows, char *msg){
 	int r;
 
-	printf("%s\n", msg );
+	printf("%s\n", msg);
 	for(r=0; r<rows; r++){
 	   printf("\t %d", arr[r]);
 	}
@@ -71,4 +73,12 @@ void printVector(int *arr, int rows, char *msg){
 // return an integer random number between 0 and range-1
 int mrand(int range){
     return rand() % range;
+}
+
+void fill_random_numbers(int **arr, int range, int rows, int cols) {
+	for (int r = 0; r < rows; r++) {
+		for (int c = 0; c < cols; c++) {
+			arr[r][c] = mrand(range);
+		}
+	}
 }

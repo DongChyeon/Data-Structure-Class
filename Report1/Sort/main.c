@@ -7,7 +7,7 @@ int main() {
 
     long start, end;
 
-    fill_random_numbers(a, 1000);
+    fill_random_numbers(a, 10000);
     start = get_runtime();
     //print_array(a, "Before sorting");
     selection_sort(a);

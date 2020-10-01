@@ -14,5 +14,6 @@ void printNode( int **, int, int, char*);
 void printVector( int *, int, char*);
 
 int mrand(int range);
+void fill_random_numbers(int **arr, int range, int rows, int cols);
 
 #endif

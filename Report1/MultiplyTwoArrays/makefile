@@ -6,8 +6,8 @@
 #
 #all: gobhagi
 #
-gobhagi: multiply_array.o common.o
-	gcc -o gobhagi multiply_array.o common.o
+multiply_two_arrays: multiply_array.o common.o
+	gcc -o multiply_two_arrays multiply_array.o common.o
 #
 common.o: common.c common.h
 	gcc -c common.c -o common.o 
