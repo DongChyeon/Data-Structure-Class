@@ -12,7 +12,7 @@ void print_array(int* arr, int n) {
 void selection_sort(int* arr, int n) {
 	for (int i = 0; i < n - 1; i++) {
 		int least = i;
-		for (int j = i + 1; j < n; i++) {
+		for (int j = i + 1; j < n; j++) {
 			if (arr[j] < arr[least]) {
 				least = j;
 			}
@@ -61,7 +61,7 @@ int main() {
 	print_array(arr, 6);
 	// 선택 정렬
 	printf("정렬 후 -> ");
-	insert_sort(arr, 6);
+	selection_sort(arr, 6);
 	print_array(arr, 6);
 
 	printf("정렬 전 -> ");
@@ -77,6 +77,12 @@ int main() {
 	printf("정렬 후 -> ");
 	bubble_sort(arr, 6);
 	print_array(arr, 6);
+
+	int arr2[1000];
+	for (int i = 0; i < 1000; i++) {
+		arr2[i] = rand() % 100;
+	}
+	insert_sort(arr2, 1000);
 
 	return 0;
 }
