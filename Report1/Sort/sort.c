@@ -3,96 +3,108 @@
 #include <time.h>
 #include "sort.h"
 
-long get_runtime(void)
+// get the current time in milliseconds
+long get_currentTime(void)
 {
     clock_t start;
     start = clock();
     return((long)((double)start * 1000.0 / (double)CLOCKS_PER_SEC));
 }
 
-int *array(int size) {
-    int *array = (int *) malloc(sizeof(int) * size);
+// create a 1-dimensional array with size
+int* vector(int size) {
+    int* vec = (int*)malloc(sizeof(int) * size);
 
-    return array;
+    return vec;
 }
 
-Array make_array(int size) {
-    Array temp;
-    temp.size = size;
-    temp.val = array(size);
+// create a Array structure
+Array *make_array(int size) {
+    Array *arr = (Array *)malloc(sizeof(Array));
+    arr->size = size;
+    arr->val = vector(size);
 
-    return temp;
+    return arr;
 }
 
-void freeArray(Array array) {
-    free(array.val);
+// deallocate a 1-dimensional array
+void freeVector(int* vec) {
+    free(vec);
 }
 
-// 두 원소 교환
-void swap(int *val1, int *val2) {
+// deallocate Array structrue
+void freeArray(Array* arr) {
+    freeVector(arr->val);
+    free(arr);
+}
+
+// swap two elements
+void swap(int* val1, int* val2) {
     int temp = *val1;
     *val1 = *val2;
     *val2 = temp;
 }
 
-// 선택 정렬
-void selection_sort(Array array) {
-    for (int i = 0; i < array.size - 1; i++) {
+void selection_sort(Array* arr) {
+    for (int i = 0; i < arr->size - 1; i++) {
         int least = i;
-        for (int j = i + 1; j < array.size; j++) {
-            if (array.val[j] < array.val[least]) {
+        for (int j = i + 1; j < arr->size; j++) {
+            if (arr->val[j] < arr->val[least]) {
                 least = j;
             }
         }
-        swap(&array.val[i], &array.val[least]);
+        swap(&arr->val[i], &arr->val[least]);
     }
 }
 
-// 삽입 정렬
-void insert_sort(Array array) {
-    for (int i = 1; i < array.size; i++) {
-        int key = array.val[i];
+void insertion_sort(Array* arr) {
+    for (int i = 1; i < arr->size; i++) {
+        int key = arr->val[i];
         int j = i - 1;
-        while (j >= 0 && array.val[j] > key) {
-            array.val[j + 1] = array.val[j];
+        while (j >= 0 && arr->val[j] > key) {
+            arr->val[j + 1] = arr->val[j];
             j--;
         }
-        array.val[j + 1] = key;
+        arr->val[j + 1] = key;
     }
 }
 
-// 버블 정렬
-void bubble_sort(Array array) {
+// improved bubble sort
+void bubble_sort(Array* arr) {
     int isSorted = 0;
 
-    for (int i = array.size - 1; i > 0 && !isSorted; i--) {
+    for (int i = arr->size - 1; i > 0 && !isSorted; i--) {
         isSorted = 1;
         for (int j = 0; j < i; j++) {
-            if (array.val[j] > array.val[j + 1]) {
-                swap(&array.val[j], &array.val[j + 1]);
+            if (arr->val[j] > arr->val[j + 1]) {
+                swap(&arr->val[j], &arr->val[j + 1]);
                 isSorted = 0;
             }
         }
     }
 }
 
-// 메시지와 함께 Array 출력
-void print_array(Array array, char* msg) {
+// output the contents of 1-dimensional array with a mssage msg
+void print_array(Array* arr, char* msg) {
     printf("%s\n", msg);
-    for (int i = 0; i < array.size; i++) {
-        printf("%d \t", array.val[i]);
+    for (int i = 0; i < arr->size; i++) {
+        printf("%d\t", arr->val[i]);
+        if ((i + 1) != 1 && (i + 1) % 10 == 0) {
+            printf("\n");
+        }   // Output ten elements per a row
     }
     printf("\n\n");
 }
 
-// 0부터 range - 1까지의 랜덤한 수 발생
-int mrand(int range){
+// return an integer random number between 0 and range-1
+int mrand(int range) {
     return rand() % range;
 }
 
-// 랜덤한 수로 Array 채우기
-void fill_random_numbers(Array arr, int range) {
-    for (int i = 0; i < arr.size; i++) {
-        arr.val[i] = mrand(range);
+// fill the contents of a 2-dimensional array with random number
+void fill_random_numbers(Array* arr, int range, unsigned int seed) {
+    srand(seed);
+    for (int i = 0; i < arr->size; i++) {
+        arr->val[i] = mrand(range);
     }
 }

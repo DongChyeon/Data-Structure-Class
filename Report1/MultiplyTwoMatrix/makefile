@@ -1,19 +1,11 @@
-#
-# makefile
-#
-#CC=gcc -g
-#LIBS= -lstdc++
-#
-#all: gobhagi
-#
-matrix_multiplication: multiply_array.o common.o
-	gcc -o matrix_multiplication multiply_array.o common.o
-#
-common.o: common.c common.h
-	gcc -c common.c -o common.o 
-#
-multiply_array.o: multiply_array.c
-	gcc -c multiply_array.c -o multiply_array.o
-#
+matrix_multiplication: main.o matrix.o
+	gcc -o matrix_multiplication main.o matrix.o
+
+matrix.o: matrix.c matrix.h
+	gcc -c matrix.c -o matrix.o 
+
+main.o: main.c
+	gcc -c main.c -o main.o
+
 clean:
-	rm -f gobhagi *.o
+	rm -f matrix_multiplication *.o

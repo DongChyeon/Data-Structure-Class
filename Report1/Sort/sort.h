@@ -3,24 +3,25 @@
 #define _SORT_
 
 typedef struct {
-    int *val;
+    int* val;
     int size;
 } Array;
 
-long get_runtime(void);
+long get_currentTime(void);
 
-int *array(int size);
-Array make_array(int size);
+int* vector(int size);
+Array* make_array(int size);
 
-void freeArray(Array array);
+void freeVector(int* vec);
+void freeArray(Array* arr);
 
-void swap(int *val1, int *val2);
-void selection_sort(Array array);
-void insert_sort(Array array);
-void bubble_sort(Array array);
+void swap(int* val1, int* val2);
+void selection_sort(Array* arr);
+void insertion_sort(Array* arr);
+void bubble_sort(Array* arr);
 
-void print_array(Array array, char *msg);
+void print_array(Array* arr, char* msg);
 int mrand(int range);
-void fill_random_numbers(Array array, int range);
+void fill_random_numbers(Array* arr, int range, unsigned int seed);
 
 #endif
