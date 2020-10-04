@@ -7,7 +7,7 @@ int main() {
    unsigned int seed = time(NULL);
    long start, end;
    
-   int m = 100000, n = 100, p = 100;
+   int m = 225, n = 200, p = 275;
    Matrix *a, *b, *res;
 
    a = make_matrix(m, n);

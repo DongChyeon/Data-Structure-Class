@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 
 plt.title("Execution time")
 
-plt.plot([50000,75000,100000,125000,150000], [1961,2837,3774,4773,5696])
+plt.plot([20000,40000,60000,80000,100000], [6,13,23,32,50])
 
-plt.xlabel("rows of m")
+plt.xlabel("Input data size")
 plt.ylabel("Average of Execution time(msec)")
 
 plt.show()
