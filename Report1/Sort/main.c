@@ -7,11 +7,11 @@ int main() {
     long start, end;
 
     Array* a, * b, * c;
-    a = make_array(125000);
+    a = make_array(112500);
     fill_random_numbers(a, 1000, seed);
-    b = make_array(125000);
+    b = make_array(112500);
     fill_random_numbers(b, 1000, seed);
-    c = make_array(125000);
+    c = make_array(112500);
     fill_random_numbers(c, 1000, seed);
 
     //print_array(a, "Before sorting");
