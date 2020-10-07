@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "common.h"
 
 int get_value(int r, int c, SPARSE_MATRIX *s) {
