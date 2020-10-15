@@ -4,7 +4,7 @@
 #include "stack.h"
 
 Stack *create (int n) {
-    Stack *stack = (Stack *)malloc(sizeof(Stack));
+    Stack *stack = (Stack *) malloc(sizeof(Stack));
     stack->element = (int *) malloc(sizeof(int) * n);
     stack->max_size = n;
     stack->top = 0;
