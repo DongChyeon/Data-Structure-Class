@@ -23,7 +23,8 @@ bool isFull(Queue *queue) {
 
 void enqueue(Queue *queue, int elem) {
     if (!isFull(queue)) {
-        queue->element[queue->rear++] = elem;
+        queue->rear = queue->rear + 1 % (queue->max_size - 1);
+        queue->element[queue->rear - 1] = elem;
     }
 }
 
@@ -36,7 +37,8 @@ bool isEmpty(Queue *queue) {
 
 int dequeue(Queue *queue) {
     if (!isEmpty(queue)) {
-        return queue->element[queue->front++];
+        queue->front = queue->front + 1 % (queue->max_size - 1);
+        return queue->element[queue->front - 1];
     }
 }
 
