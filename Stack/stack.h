@@ -1,14 +1,14 @@
 #include <stdbool.h>
 
 typedef struct {
-        int *element;
-        int max_size;
+        char *element;
+        int size;
         int top;
 } Stack;
 
-Stack *create (int n);
+Stack *create(int n);
 bool isFull(Stack *stack);
-void push(Stack *stack, int elem);
+void push(Stack *stack, char elem);
 bool isEmpty(Stack *stack);
-int pop(Stack *stack);
+char pop(Stack *stack);
 void printStack(Stack *stack);
