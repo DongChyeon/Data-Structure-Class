@@ -7,13 +7,13 @@ Stack *create(int n) {
     Stack *stack = (Stack *) malloc(sizeof(Stack));
     stack->element = (char *) malloc(sizeof(char) * n);
     stack->size = n;
-    stack->top = 0;
+    stack->top = -1;
 
     return stack;
 }
 
 bool isFull(Stack *stack) {
-    if (stack->top == stack->size + 1) 
+    if (stack->top == stack->size - 1) 
         return true;
     else 
         return false; 
@@ -21,12 +21,13 @@ bool isFull(Stack *stack) {
 
 void push(Stack *stack, char elem) {
     if (!isFull(stack)) {
-        stack->element[stack->top++] = elem;
+        stack->top++;
+        stack->element[stack->top] = elem;
     }
 }
 
 bool isEmpty(Stack *stack) {
-    if (stack->top == 0) 
+    if (stack->top == -1) 
         return true;
     else 
         return false;
@@ -34,13 +35,12 @@ bool isEmpty(Stack *stack) {
 
 char pop(Stack *stack) {
     if (!isEmpty(stack)) {
-        stack->top--;
-        return stack->element[stack->top];
+        return stack->element[stack->top--];
     }
 }
 
 void printStack(Stack *stack) {
-    for (int i = 0; i < stack->top; i++) {
+    for (int i = 0; i < stack->top + 1; i++) {
         printf("%c ", stack->element[i]);
     }
     printf("\n");

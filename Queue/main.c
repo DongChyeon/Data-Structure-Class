@@ -8,10 +8,20 @@ int main() {
     enqueue(queue, 3);
     enqueue(queue, 4);
     printQueue(queue);
+
     dequeue(queue);
     printQueue(queue);
+    
     enqueue(queue, 5);
+    printQueue(queue);
+
+    dequeue(queue);
+    printQueue(queue);
+
     enqueue(queue, 6);
+    printQueue(queue);
+
+    enqueue(queue, 7);
     printQueue(queue);
 
     return 0;

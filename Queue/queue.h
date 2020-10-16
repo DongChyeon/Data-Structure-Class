@@ -2,7 +2,7 @@
 
 typedef struct {
     int *element;
-    int max_size;
+    int size;
     int front,rear;
     bool last_oper;
 } Queue;
