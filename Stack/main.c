@@ -2,6 +2,22 @@
 #include <string.h>
 #include "stack.h"
 
+void parentheses_matching(Stack *stack, char *str);
+void infix_to_postfix(Stack *stack, char *equation);
+void infix_to_postfix2(Stack *stack, char *equation);
+int priority(char oper);
+
+int main() {
+    Stack *stack = create(10);
+    char *str = "(A*(B-C/D)+E)/F+G";
+
+    //parentheses_matching(stack, str);
+    //infix_to_postfix(stack, str);
+    infix_to_postfix2(stack, str);
+
+    return 0;
+}
+
 void parentheses_matching(Stack *stack, char *str) {
     for (int i = 0; i < strlen(str); i++) {
         if (str[i] == '(') push(stack, (char) str[i]);
@@ -12,7 +28,6 @@ void parentheses_matching(Stack *stack, char *str) {
     else
         printf("The equation doesn't hold.\n"); 
 }
-
 
 void infix_to_postfix(Stack *stack, char *equation) {
     for (int i = 0; i < strlen(equation); i++) {
@@ -28,13 +43,36 @@ void infix_to_postfix(Stack *stack, char *equation) {
     }
 }
 
+void infix_to_postfix2(Stack *stack, char *equation) {
+    char temp;
 
-int main() {
-    Stack *stack = create(10);
-    char *str = "((A+B)*C)";
+    for (int i = 0; i < strlen(equation); i++) {
+        if (equation[i] == '(') {
+            push(stack, equation[i]);
+        } else if (equation[i] == ')') {
+            while (1) {
+                temp = pop(stack);
+                if (temp == '(') {
+                    break;
+                }
+                printf("%c", temp);
+            }
+        } else if (equation[i] >= 65 && equation[i] <= 90) {
+			printf("%c", equation[i]);
+        } else {
+            if (priority(stack->element[stack->top]) >= priority(equation[i])) {
+                printf("%c", pop(stack));
+            }
+            push(stack, equation[i]);
+        }
+    }
+    while (stack->top != -1) {
+        printf("%c", pop(stack));
+    }
+}
 
-    //parentheses_matching(stack, str);
-    infix_to_postfix(stack, str);
-
-    return 0;
+int priority(char oper) {
+    if (oper == '*' || oper == '/') return 2;
+    else if (oper == '+' || oper == '-') return 1;
+    else return 0;
 }
