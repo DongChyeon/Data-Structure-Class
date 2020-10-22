@@ -2,19 +2,23 @@
 #include "linkedList.h"
 
 int main() {
-    LinkedList list = makeFirstItem(1);
-    list = addItem(list, 2);
-    list = addItem(list, 3);
-    writeListItem(list);
+    LinkedList list = makeList();
+    addItem(list, 1);
+    addItem(list, 2);
+    addItem(list, 3);
+    printListItems(list);
 
-    deleteFirstItem(list);
-    writeListItem(list);
+    deleteItem(list, 3);
+    printListItems(list);
 
     deleteItem(list, 1);
-    writeListItem(list);
+    printListItems(list);
+
+    findItem(list, 2);
+    findItem(list, 1);
 
     makeListEmpty(list);
-    writeListItem(list);
+    printListItems(list);
 
     deleteList(list);
 

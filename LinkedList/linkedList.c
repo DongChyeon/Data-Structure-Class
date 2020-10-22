@@ -10,7 +10,7 @@ bool isEmpty(List list) {
         return false;
 }
 
-void writeListItem(List list) {
+void printListItems(List list) {
     if (isEmpty(list)) {
         printf("List is empty\n");
         return;
@@ -24,29 +24,34 @@ void writeListItem(List list) {
     printf("\n");
 }
 
-List makeFirstItem(Element elem) {
+List makeList() {
     List list = (List)malloc(sizeof(struct head_pointer));
-    Node fItem = (list_pointer)malloc(sizeof(struct list_node));
-    list->head = fItem;
-    fItem->value = elem;
-    fItem->link = NULL;
+    list->head = NULL;
 
     return list;
 }
 
-List addItem(List list, Element elem) {
+void addItem(List list, Element elem) {
     list_pointer ptrNode = (list_pointer)malloc(sizeof(struct list_node));
     if (ptrNode == NULL) {
         printf("::Unable to allocate more memory!!!\n");
     }
     ptrNode->value = elem;
-    ptrNode->link = list->head;
-    list->head = ptrNode;
-
-    return list;
+    if (isEmpty(list)) {
+        list->head = ptrNode;
+        ptrNode->link = NULL;
+    } else {
+        ptrNode->link = list->head;
+        list->head = ptrNode;
+    }
 }
 
 Node findItem(List list, Element elem) {
+    if (isEmpty(list)) {
+        printf("%d does not exist.\n", elem);
+        return NULL;
+    }
+
     Node tnode = list->head;
     while (tnode != NULL) {
         if (tnode->value == elem) {
@@ -60,22 +65,19 @@ Node findItem(List list, Element elem) {
     return NULL;
 }
 
-List deleteFirstItem(List list) {
-    Node anode = list->head;
-    if (anode == NULL) {
-        printf("list is empty.\n");
-    }
-    else {
-        list->head = anode->link;
-        free(anode);
+void deleteItem(List list, Element elem) {
+    if (isEmpty(list)) {
+        printf("List is empty\n");
+        return;
     }
 
-    return list;
-}
-
-List deleteItem(List list, Element elem) {
     Node anode = list->head;
     Node dnode = anode->link;
+    if (anode->value == elem) {
+        list->head = dnode;
+        free(anode);
+    }
+    
     while (dnode != NULL) {
         if (dnode->value == elem) {
             anode->link = dnode->link;
@@ -85,11 +87,9 @@ List deleteItem(List list, Element elem) {
         anode = dnode;
         dnode = anode->link;
     }
-
-    return list;
 }
 
-List makeListEmpty(List list) {
+void makeListEmpty(List list) {
     Node anode = list->head;
     Node bnode;
     while (anode != NULL) {
@@ -98,8 +98,6 @@ List makeListEmpty(List list) {
         anode = bnode;
     }
     list->head = NULL;
-
-    return list;
 }
 
 void deleteList(List list) {

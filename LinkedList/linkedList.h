@@ -14,12 +14,11 @@ typedef struct head_pointer {
 } head_pointer;
 
 bool isEmpty(List list);
-void writeListItem(List list);
-List makeFirstItem(Element elem);
-List addItem(List list, Element elem);
+void printListItems(List list);
+List makeList();
+void addItem(List list, Element elem);
 Node findItem(List list, Element elem);
-List deleteFirstItem(List list);
-List deleteItem(List list, Element elem);
-List makeListEmpty(List list);
+void deleteItem(List list, Element elem);
+void makeListEmpty(List list);
 void deleteList(List list);
 
