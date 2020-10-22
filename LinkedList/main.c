@@ -2,7 +2,7 @@
 #include "linkedList.h"
 
 int main() {
-    List list = makeFirstItem(1);
+    LinkedList list = makeFirstItem(1);
     list = addItem(list, 2);
     list = addItem(list, 3);
     writeListItem(list);
@@ -15,6 +15,8 @@ int main() {
 
     makeListEmpty(list);
     writeListItem(list);
+
+    deleteList(list);
 
     return 0;
 }
