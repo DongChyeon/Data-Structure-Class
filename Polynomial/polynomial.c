@@ -5,7 +5,7 @@
 poly_node makeList() {
     poly_node node;
 
-    node = (poly_node)malloc(sizeof(poly_ptr));
+    node = (poly_node)malloc(sizeof(struct term_node));
     if (node == NULL) {
         fprintf(stderr, "The memory is full\n");
         exit(1);
@@ -19,7 +19,10 @@ void printNodes(poly_node node) {
     poly_node temp = node->link;
 
     while (temp) {
-        printf("%d^%d ", temp->coef, temp->expon);
+        if (temp->expon == 0) 
+            printf("%d ", temp->coef);
+        else 
+            printf("%d^%d ", temp->coef, temp->expon);
         temp = temp->link;
     }
     printf("\n");
@@ -27,7 +30,7 @@ void printNodes(poly_node node) {
 
 void append(int coef, int expon, poly_node ptr) {
     poly_node temp;
-    temp = (poly_node)malloc(sizeof(poly_ptr));
+    temp = (poly_node)malloc(sizeof(struct term_node));
     if (temp == NULL) {
         fprintf(stderr, "The memory is full\n");
         exit(1);
@@ -56,13 +59,15 @@ void erase(poly_node ptr) {
 poly_node poly_add(poly_node a, poly_node b) {
     poly_node front;
     int sum;
-    front = (poly_node)malloc(sizeof(poly_ptr));
+    front = (poly_node)malloc(sizeof(struct term_node));
     if (front == NULL) {
         fprintf(stderr, "The memory is full\n");
         exit(1);
     }
     front->link = NULL;
 
+    a = a->link;
+    b = b->link;
     while (a && b) {
         switch (COMPARE(a->expon, b->expon)) {
         case -1:
