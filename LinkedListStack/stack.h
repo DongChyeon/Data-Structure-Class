@@ -1,5 +1,8 @@
 #include <stdbool.h>
 
+#ifndef _STACK_
+#define STACK
+
 typedef int Element;
 typedef struct list_node* list_pointer;
 typedef struct head_pointer* LinkedList;
@@ -20,3 +23,5 @@ void push(Stack stack, Element elem);
 Element pop(Stack stack);
 void makeStackEmpty(Stack stack);
 void deleteStack(Stack stack);
+
+#endif

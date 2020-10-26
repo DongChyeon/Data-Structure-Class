@@ -1,5 +1,8 @@
 #include <stdbool.h>
 
+#ifndef _QUEUE_
+#define _QUEUE
+
 typedef struct {
     int *element;
     int size;
@@ -14,3 +17,5 @@ int dequeue(Queue *queue);
 bool isEmpty(Queue *queue);
 int pop(Queue *queue);
 void printQueue(Queue *queue);
+
+#endif

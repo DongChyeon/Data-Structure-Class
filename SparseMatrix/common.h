@@ -1,4 +1,8 @@
+#ifndef _COMMON_
+#define _COMMON_
+
 #define MAX_TERMS 101
+
 typedef struct
 {
     int col;
@@ -11,3 +15,5 @@ int **array(int rows, int cols);
 void freeArray(int **arr, int rows);
 void freeVector( int *vec);
 void printArray(int **arr, int rows, int cols, char *msg);
+
+#endif

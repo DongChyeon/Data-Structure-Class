@@ -1,5 +1,8 @@
 #include <stdbool.h>
 
+#ifndef _LINKED_LIST_
+#define _LINKED_LIST_
+
 typedef int Element;
 typedef struct list_node* list_pointer;
 typedef struct head_pointer* LinkedList;
@@ -22,3 +25,4 @@ void deleteItem(List list, Element elem);
 void makeListEmpty(List list);
 void deleteList(List list);
 
+#endif

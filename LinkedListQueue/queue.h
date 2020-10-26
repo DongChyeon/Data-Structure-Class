@@ -1,5 +1,8 @@
 #include <stdbool.h>
 
+#ifndef _QUEUE_
+#define _QUEUE_
+
 typedef int Element;
 typedef struct list_node* list_pointer;
 typedef struct head_pointer* LinkedList;
@@ -21,3 +24,5 @@ void enqueue(Queue queue, Element elem);
 Element dequeue(Queue queue);
 void makeQueueEmpty(Queue queue);
 void deleteQueue(Queue queue);
+
+#endif
