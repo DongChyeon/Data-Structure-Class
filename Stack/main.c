@@ -3,17 +3,22 @@
 #include "stack.h"
 
 void parentheses_matching(Stack *stack, char *str);
+//void infix_to_postfix(char *equation, Stack *stack);
 void infix_to_postfix(Stack *stack, char *equation);
 void infix_to_postfix2(Stack *stack, char *equation);
 int priority(char oper);
 
 int main() {
     Stack *stack = create(10);
-    char *str = "(A*(B-C/D)+E)/F+G";
+    //char *str = "(A*(B-C/D)+E)/F+G";
+    //char *str = "(((A+B)*C)-D)";
+    char *str = "(((1+2)*3)-4)";
 
     //parentheses_matching(stack, str);
     //infix_to_postfix(stack, str);
-    infix_to_postfix2(stack, str);
+    infix_to_postfix(stack, str);
+    printf("%d", postfix_calculate(stack));
+    //infix_to_postfix2(stack, str);
 
     return 0;
 }
@@ -30,6 +35,41 @@ void parentheses_matching(Stack *stack, char *str) {
 }
 
 void infix_to_postfix(Stack *stack, char *equation) {
+    char temp;
+
+    for (int i = 0; i < strlen(equation); i++) {
+        if (equation[i] == '(') {
+            continue;
+        } else if (equation[i] == ')') {
+            push(stack, temp);
+        } else if (equation[i] == '*' || equation[i] == '/' || equation[i] == '+' || equation[i] == '-') {
+            temp = equation[i];
+        } else {
+            push(stack, equation[i]);
+        }
+    }
+}
+
+/*
+void infix_to_postfix(char *equation) {
+    char temp;
+
+    for (int i = 0; i < strlen(equation); i++) {
+        if (equation[i] == '(') {
+            continue;
+        } else if (equation[i] == ')') {
+            printf("%c", temp);
+        } else if (equation[i] >= 65 && equation[i] <= 90) {
+            printf("%c", equation[i]);
+        } else {
+            temp = equation[i];
+        }
+    }
+}
+*/
+
+/*
+void infix_to_postfix(Stack *stack, char *equation) {
     for (int i = 0; i < strlen(equation); i++) {
         if (equation[i] == '(') {
             continue;
@@ -42,6 +82,7 @@ void infix_to_postfix(Stack *stack, char *equation) {
         }
     }
 }
+*/
 
 void infix_to_postfix2(Stack *stack, char *equation) {
     char temp;
