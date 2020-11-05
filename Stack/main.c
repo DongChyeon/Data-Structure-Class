@@ -10,7 +10,7 @@ int priority(char oper);
 
 int main() {
     Stack *stack = create(10);
-    char *str = "(A*(B-C/D)+E)/F+G";
+    char *str = "(A+B)*C-D";
     //char *str = "(((A+B)*C)-D)";
 
     //parentheses_matching(stack, str);
@@ -104,6 +104,7 @@ void infix_to_postfix2(Stack *stack, char *equation) {
             push(stack, equation[i]);
         }
     }
+    
     while (stack->top != -1) {
         printf("%c", pop(stack));
     }

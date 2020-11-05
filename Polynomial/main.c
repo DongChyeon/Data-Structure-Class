@@ -14,10 +14,14 @@ int main() {
     append(3, 10, b);
     append(10, 6, b);
 
-    c = poly_add(a, b);
+    //c = poly_add(a, b);
 
     printNodes(a);
     printNodes(b);
+    //printNodes(c);
+
+    c = poly_multiply(a, b);
+
     printNodes(c);
 
     return 0;

@@ -14,6 +14,7 @@ poly_node makeList();
 void printNodes(poly_node node);
 void append(int coef, int expon, poly_node ptr);
 void erase(poly_node ptr);
+poly_node poly_multiply(poly_node a, poly_node b);
 poly_node poly_add(poly_node a, poly_node b);
 int COMPARE(int a, int b);
 

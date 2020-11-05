@@ -22,7 +22,7 @@ void printNodes(poly_node node) {
         if (temp->expon == 0) 
             printf("%d ", temp->coef);
         else 
-            printf("%d^%d ", temp->coef, temp->expon);
+            printf("%dx^%d ", temp->coef, temp->expon);
         temp = temp->link;
     }
     printf("\n");
@@ -54,6 +54,31 @@ void erase(poly_node ptr) {
         ptr = ptr->link;
         free(temp);
     }
+}
+
+poly_node poly_multiply(poly_node a, poly_node b) {
+    poly_node front, poly1, poly2;
+    int sum;
+    front = (poly_node)malloc(sizeof(struct term_node));
+    if (front == NULL) {
+        fprintf(stderr, "The memory is full\n");
+        exit(1);
+    }
+    front->link = NULL;
+
+    poly1 = a->link;
+    poly2 = b->link;
+
+    while (poly1) {
+        while (poly2) {
+            append(poly1->coef*poly1->coef, poly2->expon+poly2->expon, front);
+            poly2 = poly2->link;
+        }
+        poly2 = b->link;
+        poly1 = poly1->link;
+    }
+
+    return front;
 }
 
 poly_node poly_add(poly_node a, poly_node b) {

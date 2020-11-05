@@ -2,27 +2,17 @@
 #include "queue.h"
 
 int main() {
-    Queue *queue = create(5);
-    enqueue(queue, 1);
-    enqueue(queue, 2);
-    enqueue(queue, 3);
-    enqueue(queue, 4);
-    printQueue(queue);
+    int a, b;
 
-    dequeue(queue);
-    printQueue(queue);
-    
-    enqueue(queue, 5);
-    printQueue(queue);
+    Queue *queue = create(10);
+    enqueue(queue, 10);
+    enqueue(queue, 20);
+    enqueue(queue, 14);
 
-    dequeue(queue);
-    printQueue(queue);
-
-    enqueue(queue, 6);
-    printQueue(queue);
-
-    enqueue(queue, 7);
-    printQueue(queue);
+    a = dequeue(queue);
+    enqueue(queue, -3);
+    b = dequeue(queue);
+    printf("a = %d, b = %d, a + b + dequeue(queue) = %d", a, b, a + b + dequeue(queue));
 
     return 0;
 }

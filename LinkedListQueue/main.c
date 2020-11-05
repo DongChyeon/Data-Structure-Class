@@ -9,7 +9,6 @@ int main() {
     printQueueItems(queue);
 
     dequeue(queue);
-    printQueueItems(queue);
     dequeue(queue);
     printQueueItems(queue);
     dequeue(queue);
@@ -19,11 +18,6 @@ int main() {
     enqueue(queue, 3);
     enqueue(queue, 5);
     printQueueItems(queue);
-
-    makeQueueEmpty(queue);
-    printQueueItems(queue);
-
-    deleteQueue(queue);
 
     return 0;
 }
