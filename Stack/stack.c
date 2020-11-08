@@ -39,6 +39,12 @@ char pop(Stack *stack) {
     }
 }
 
+char peek(Stack *stack) {
+    if (!isEmpty(stack)) {
+        return stack->element[stack->top];
+    }
+}
+
 void printStack(Stack *stack) {
     for (int i = 0; i < stack->top + 1; i++) {
         printf("%c ", stack->element[i]);

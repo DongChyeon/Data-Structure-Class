@@ -11,4 +11,5 @@ bool isFull(Stack *stack);
 void push(Stack *stack, char elem);
 bool isEmpty(Stack *stack);
 char pop(Stack *stack);
+char peek(Stack *stack);
 void printStack(Stack *stack);
