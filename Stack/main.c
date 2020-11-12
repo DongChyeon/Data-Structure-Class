@@ -11,12 +11,12 @@ int priority(char oper);
 int main() {
     Stack *stack = create(10);
 
-    //char *str = "(A+B)*C-D";
+    char *str = "A+B*C-D/E+F";
     //char *str = "(((A+B)*C)-D)";
 
     //parentheses_matching(stack, str);
     //infix_to_postfix(stack, str);
-    //infix_to_postfix2(stack, str);
+    infix_to_postfix2(stack, str);
 
     return 0;
 }

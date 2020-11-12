@@ -3,8 +3,8 @@
 #include <stdbool.h>
 #include "queue.h"
 
-Queue *create(int n) {
-    Queue *queue = (Queue *) malloc(sizeof(Queue));
+Queue create(int n) {
+    Queue queue = (Queue) malloc(sizeof(queue));
     queue->element = (int *) malloc(sizeof(int) * n);
     queue->size = n;
     queue->front = 0;
@@ -14,14 +14,14 @@ Queue *create(int n) {
     return queue;
 }
 
-bool isFull(Queue *queue) {
+bool isFull(Queue queue) {
     if (queue->front == queue->rear && !queue->last_oper)
         return true;
     else
         return false;
 }
 
-void enqueue(Queue *queue, int elem) {
+void enqueue(Queue queue, int elem) {
     if (!isFull(queue)) {
         queue->rear = (queue->rear + 1) % queue->size;
         queue->element[queue->rear] = elem;
@@ -29,14 +29,14 @@ void enqueue(Queue *queue, int elem) {
     }
 }
 
-bool isEmpty(Queue *queue) {
+bool isEmpty(Queue queue) {
     if (queue->front == queue->rear && queue->last_oper)
         return true;
     else
         return false;
 }
 
-int dequeue(Queue *queue) {
+int dequeue(Queue queue) {
     if (!isEmpty(queue)) {
         queue->front = (queue->front + 1) % queue->size;
         queue->last_oper = true;
@@ -44,7 +44,7 @@ int dequeue(Queue *queue) {
     }
 }
 
-void printQueue(Queue *queue) {
+void printQueue(Queue queue) {
     if (queue->front > queue->rear && queue->rear == 0 && queue->last_oper) {
         for (int i = queue->front + 1; i < queue->size; i++) {
             printf("%d ", queue->element[i]);

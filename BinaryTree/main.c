@@ -13,5 +13,10 @@ int main() {
 
     setRoot(tree, a);
 
+    printInorder(tree);
+    printPreorder(tree);
+    printPostorder(tree);
+    printLevelorder(tree);
+
     return 0; 
 }

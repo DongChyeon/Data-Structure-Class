@@ -16,14 +16,19 @@ typedef struct binaryNode {
 } binaryNode;
 
 BinaryNode makeNode(int elem, BinaryNode left, BinaryNode right);
-void setData(BinaryNode node, int elem);
-void setLeft(BinaryNode node, BinaryNode left);
-void setRight(BinaryNode node, BinaryNode right);
-Element getData(BinaryNode node);
 
 BinaryTree makeTree();
+bool isTreeEmpty(BinaryTree tree);
 void setRoot(BinaryTree tree, BinaryNode root);
-BinaryNode getRoot(BinaryTree tree);
-bool isEmpty(BinaryTree tree);
+
+void inorder(BinaryNode node);
+void preorder(BinaryNode node);
+void postorder(BinaryNode node);
+void levelorder(BinaryNode node);
+
+void printInorder(BinaryTree tree);
+void printPreorder(BinaryTree tree);
+void printPostorder(BinaryTree tree);
+void printLevelorder(BinaryTree tree);
 
 #endif
