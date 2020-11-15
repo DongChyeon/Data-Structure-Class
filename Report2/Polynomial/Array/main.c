@@ -2,11 +2,11 @@
 #include "polynomial.h"
 
 int main() {
-    poly_node a, b, c;
+    Poly a, b, c;
 
-    a = makePoly();
-    b = makePoly();
-
+    a = makePoly(14);
+    b = makePoly(14);
+    
     append(3, 14, a);
     append(4, 10, a);
     append(2, 8, a);
