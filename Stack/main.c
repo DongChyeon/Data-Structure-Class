@@ -2,10 +2,10 @@
 #include <string.h>
 #include "stack.h"
 
-void parentheses_matching(Stack *stack, char *str);
+void parentheses_matching(Stack stack, char *str);
 //void infix_to_postfix(char *equation, Stack *stack);
-void infix_to_postfix(Stack *stack, char *equation);
-void infix_to_postfix2(Stack *stack, char *equation);
+void infix_to_postfix(Stack stack, char *equation);
+void infix_to_postfix2(Stack stack, char *equation);
 int priority(char oper);
 
 int main() {
@@ -21,7 +21,7 @@ int main() {
     return 0;
 }
 
-void parentheses_matching(Stack *stack, char *str) {
+void parentheses_matching(Stack stack, char *str) {
     for (int i = 0; i < strlen(str); i++) {
         if (str[i] == '(') push(stack, (char) str[i]);
         if (str[i] == ')') pop(stack);
@@ -32,7 +32,7 @@ void parentheses_matching(Stack *stack, char *str) {
         printf("The equation doesn't hold.\n"); 
 }
 
-void infix_to_postfix(Stack *stack, char *equation) {
+void infix_to_postfix(Stack stack, char *equation) {
     char temp;
 
     for (int i = 0; i < strlen(equation); i++) {
@@ -67,7 +67,7 @@ void infix_to_postfix(char *equation) {
 */
 
 /*
-void infix_to_postfix(Stack *stack, char *equation) {
+void infix_to_postfix(Stack stack, char *equation) {
     for (int i = 0; i < strlen(equation); i++) {
         if (equation[i] == '(') {
             continue;
@@ -82,7 +82,7 @@ void infix_to_postfix(Stack *stack, char *equation) {
 }
 */
 
-void infix_to_postfix2(Stack *stack, char *equation) {
+void infix_to_postfix2(Stack stack, char *equation) {
     char temp;
 
     for (int i = 0; i < strlen(equation); i++) {
