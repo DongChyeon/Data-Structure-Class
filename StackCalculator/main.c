@@ -2,30 +2,30 @@
 #include <string.h>
 #include "stack.h"
 
-void infix_to_postfix(Stack *stack, char *equation);
-double postfix_calculate(char *postfix_equation, Stack *stack);
+void infix_to_postfix(Stack *stack, char *infix_exp);
+double postfix_calculate(char *postfix_infix_exp, Stack *stack);
 
-void infix_to_postfix(Stack *stack, char *equation) {
+void infix_to_postfix(Stack *stack, char *infix_exp) {
     char temp;
 
-    for (int i = 0; i < strlen(equation); i++) {
-        if (equation[i] == '(') {
+    for (int i = 0; i < strlen(infix_exp); i++) {
+        if (infix_exp[i] == '(') {
             continue;
-        } else if (equation[i] == ')') {
+        } else if (infix_exp[i] == ')') {
             push(stack, temp);
-        } else if (equation[i] == '*' || equation[i] == '/' || equation[i] == '+' || equation[i] == '-') {
-            temp = equation[i];
+        } else if (infix_exp[i] == '*' || infix_exp[i] == '/' || infix_exp[i] == '+' || infix_exp[i] == '-') {
+            temp = infix_exp[i];
         } else {
-            push(stack, equation[i]);
+            push(stack, infix_exp[i]);
         }
     }
 }
 
-double postfix_calculate(char *postfix_equation, Stack *stack) {
+double postfix_calculate(char *postfix_infix_exp, Stack *stack) {
     double one, two;
 
-    for (int i = 0; i < strlen(postfix_equation); i++) {
-        switch (postfix_equation[i]) {
+    for (int i = 0; i < strlen(postfix_infix_exp); i++) {
+        switch (postfix_infix_exp[i]) {
             case '*':
                 one = pop(stack);
                 two = pop(stack);
@@ -47,7 +47,7 @@ double postfix_calculate(char *postfix_equation, Stack *stack) {
                 push(stack, two - one);
                 break;
             default:
-                push(stack, (int)postfix_equation[i] - 48);
+                push(stack, (int)postfix_infix_exp[i] - 48);
                 break;
         }
     }

@@ -3,10 +3,10 @@
 #include "binaryTree.h"
 #include "stack.h"
 
-BinaryTree infix_to_postfix(char *equation);
+BinaryTree infix_to_postfix(char *infix_exp);
 int priority(char oper); 
 
-BinaryTree infix_to_postfix(char *equation) {
+BinaryTree infix_to_postfix(char *infix_exp) {
     BinaryTree tree = makeTree();
     BinaryNode node;
     BinaryNode center, left, right;
@@ -14,11 +14,11 @@ BinaryTree infix_to_postfix(char *equation) {
     Stack operator = makeStack();
     Stack operand = makeStack();
 
-    for (int i = 0; i < strlen(equation); i++) {
-        if (equation[i] == '(') {
+    for (int i = 0; i < strlen(infix_exp); i++) {
+        if (infix_exp[i] == '(') {
             node = makeNode('(', NULL, NULL);
             push(operator, node);
-        } else if (equation[i] == ')') {
+        } else if (infix_exp[i] == ')') {
             while (1) {
                 center = pop(operator);
                 if (center->value == '(') {
@@ -30,11 +30,11 @@ BinaryTree infix_to_postfix(char *equation) {
                 center->right = right;
                 push(operand, center);
             }
-        } else if (equation[i] >= 65 && equation[i] <= 90) {
-            node = makeNode(equation[i], NULL, NULL);
+        } else if (infix_exp[i] >= 65 && infix_exp[i] <= 90) {
+            node = makeNode(infix_exp[i], NULL, NULL);
             push(operand, node);
         } else {
-            if (operator->top != NULL && priority(operator->top->element->value) >= priority(equation[i])) {
+            if (operator->top != NULL && priority(operator->top->element->value) >= priority(infix_exp[i])) {
                 center = pop(operator);
                 right = pop(operand);
                 left = pop(operand);
@@ -42,7 +42,7 @@ BinaryTree infix_to_postfix(char *equation) {
                 center->right = right;
                 push(operand, center);
             }
-            node = makeNode(equation[i], NULL, NULL);
+            node = makeNode(infix_exp[i], NULL, NULL);
             push(operator, node);
         }
     }
@@ -71,9 +71,11 @@ int priority(char oper) {
 }
 
 int main() {
-    char *equation = "A+B*(C-D)/E";
+    char infix_exp[128];
+    printf("Please enter a infix expression : ");
+    scanf_s("%s", &infix_exp, sizeof(infix_exp));
 
-    BinaryTree tree = infix_to_postfix(equation);
+    BinaryTree tree = infix_to_postfix(infix_exp);
 
     printInorder(tree);
     printPreorder(tree);
