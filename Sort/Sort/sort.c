@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// ¹è¿­ ¿ä¼Ò Ãâ·Â
+// ï¿½è¿­ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 void print_array(int* arr, int n) {
 	for (int i = 0; i < n; i++) {
 		printf("%d ", arr[i]);
@@ -8,7 +8,7 @@ void print_array(int* arr, int n) {
 	printf("\n");
 }
 
-// ¼±ÅÃ Á¤·Ä
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 void selection_sort(int* arr, int n) {
 	for (int i = 0; i < n - 1; i++) {
 		int least = i;
@@ -23,20 +23,20 @@ void selection_sort(int* arr, int n) {
 	}
 }
 
-// »ðÀÔ Á¤·Ä
-void insert_sort(int* arr, int n) {
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+void insertion_sort(int* arr, int n) {
 	for (int i = 1; i < n; i++) {
 		int key = arr[i];
 		int j = i - 1;
 		while (j >= 0 && arr[j] > key) {
 			arr[j + 1] = arr[j];
 			j--;
-		}	// »õ·Î »ðÀÔÇÒ ¼ýÀÚ°¡ ¾Õ ¼ýÀÚº¸´Ù ÀÛÀ» °æ¿ì ÇÑÄ­¾¿ ¹Ð¾î¼­ »ðÀÔ
+		}	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ä­ï¿½ï¿½ ï¿½Ð¾î¼­ ï¿½ï¿½ï¿½ï¿½
 		arr[j + 1] = key;
 	}
 }
 
-// ¹öºí Á¤·Ä
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 void bubble_sort(int* arr, int n) {
 	int isSorted = 0;
 
@@ -48,33 +48,33 @@ void bubble_sort(int* arr, int n) {
 				arr[j] = arr[j + 1];
 				arr[j + 1] = temp;
 				isSorted = 0;
-			}	// ¾Õ µÚÀÇ °ªÀ» ºñ±³ÇÑ ÈÄ ±³È¯
+			}	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯
 		}
 	}
 }
 
-// ¸ÞÀÎ ÇÔ¼ö
+// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 int main() {
 	int arr[6] = { 1, 4, 3, 5, 9, 7 };
 
-	printf("Á¤·Ä Àü -> ");
+	printf("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ -> ");
 	print_array(arr, 6);
-	// ¼±ÅÃ Á¤·Ä
-	printf("Á¤·Ä ÈÄ -> ");
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	printf("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ -> ");
 	selection_sort(arr, 6);
 	print_array(arr, 6);
 
-	printf("Á¤·Ä Àü -> ");
+	printf("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ -> ");
 	print_array(arr, 6);
-	// »ðÀÔ Á¤·Ä
-	printf("Á¤·Ä ÈÄ -> ");
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	printf("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ -> ");
 	insert_sort(arr, 6);
 	print_array(arr, 6);
 	
-	printf("Á¤·Ä Àü -> ");
+	printf("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ -> ");
 	print_array(arr, 6);
-	// ¹öºí Á¤·Ä
-	printf("Á¤·Ä ÈÄ -> ");
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	printf("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ -> ");
 	bubble_sort(arr, 6);
 	print_array(arr, 6);
 

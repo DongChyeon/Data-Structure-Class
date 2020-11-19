@@ -18,7 +18,7 @@ void printStackItems(Stack stack) {
 
     list_pointer tnode = stack->top;
     while (tnode != NULL) {
-        printf("%c\t", tnode->element);
+        printf("%c\t", tnode->element->value);
         tnode = tnode->link;
     }
     printf("\n");
@@ -31,7 +31,7 @@ Stack makeStack() {
     return stack;
 }
 
-void push(Stack stack, char elem) {
+void push(Stack stack, BinaryNode elem) {
     list_pointer ptrNode = (list_pointer)malloc(sizeof(struct list_node));
     if (ptrNode == NULL) {
         printf("::Unable to allocate more memory!!!\n");
@@ -46,14 +46,15 @@ void push(Stack stack, char elem) {
     }
 }
 
-char pop(Stack stack) {
+BinaryNode pop(Stack stack) {
     Node node = stack->top;
     if (isEmpty(stack)) {
         printf("Stack is empty.\n");
-        return '?';
+        BinaryNode elem = makeNode('X', NULL, NULL);
+        return elem;
     }
     else {
-        char elem = node->element;
+        BinaryNode elem = node->element;
         stack->top = node->link;
         free(node);
 

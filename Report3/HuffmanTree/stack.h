@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include "binaryTree.h"
 
 #ifndef _STACK_
 #define STACK
@@ -8,7 +9,7 @@ typedef struct head_pointer* LinkedList;
 typedef LinkedList Stack;
 typedef list_pointer Node;
 typedef struct list_node {
-    char element;
+    BinaryNode element;
     list_pointer link;
 } list_node;
 typedef struct head_pointer {
@@ -18,8 +19,8 @@ typedef struct head_pointer {
 bool isEmpty(Stack stack);
 void printStackItems(Stack stack);
 Stack makeStack();
-void push(Stack stack, char elem);
-char pop(Stack stack);
+void push(Stack stack, BinaryNode elem);
+BinaryNode pop(Stack stack);
 void makeStackEmpty(Stack stack);
 void deleteStack(Stack stack);
 

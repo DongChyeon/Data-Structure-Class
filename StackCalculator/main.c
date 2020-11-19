@@ -2,67 +2,89 @@
 #include <string.h>
 #include "stack.h"
 
-void infix_to_postfix(Stack *stack, char *infix_exp);
-double postfix_calculate(char *postfix_infix_exp, Stack *stack);
+void infix_to_postfix( char *infix_exp);
+double postfix_calculate(char *postfix_infix_exp);
+int priority(char oper);
 
-void infix_to_postfix(Stack *stack, char *infix_exp) {
+void infix_to_postfix(char *infix_exp) {
+    Stack operator = makeStack();
     char temp;
 
     for (int i = 0; i < strlen(infix_exp); i++) {
         if (infix_exp[i] == '(') {
-            continue;
+            push(operator, infix_exp[i]);
         } else if (infix_exp[i] == ')') {
-            push(stack, temp);
+            while (1) {
+                temp = pop(operator);
+                if (temp == '(') {
+                    break;
+                }
+                printf("%c", temp);
+            }
         } else if (infix_exp[i] == '*' || infix_exp[i] == '/' || infix_exp[i] == '+' || infix_exp[i] == '-') {
-            temp = infix_exp[i];
+            if (operator->top != NULL && priority(operator->top->element) >= priority(infix_exp[i])) {
+                printf("%c", pop(operator));
+            }
+            push(operator, infix_exp[i]);
         } else {
-            push(stack, infix_exp[i]);
+			printf("%c", infix_exp[i]);
         }
+    }
+    
+    while (operator->top != NULL) {
+        printf("%c", pop(operator));
     }
 }
 
-double postfix_calculate(char *postfix_infix_exp, Stack *stack) {
+
+double postfix_calculate(char *postfix_infix_exp) {
     double one, two;
+    Stack operand = makeStack();
 
     for (int i = 0; i < strlen(postfix_infix_exp); i++) {
         switch (postfix_infix_exp[i]) {
             case '*':
-                one = pop(stack);
-                two = pop(stack);
-                push(stack, two * one);
+                one = pop(operand);
+                two = pop(operand);
+                push(operand, two * one);
                 break;
             case '/':
-                one = pop(stack);
-                two = pop(stack);
-                push(stack, two / one);
+                one = pop(operand);
+                two = pop(operand);
+                push(operand, two / one);
                 break;
             case '+':
-                one = pop(stack);
-                two = pop(stack);
-                push(stack, two + one);
+                one = pop(operand);
+                two = pop(operand);
+                push(operand, two + one);
                 break;
             case '-':
-                one = pop(stack);
-                two = pop(stack);
-                push(stack, two - one);
+                one = pop(operand);
+                two = pop(operand);
+                push(operand, two - one);
                 break;
             default:
-                push(stack, (int)postfix_infix_exp[i] - 48);
+                push(operand, (int)postfix_infix_exp[i] - 48);
                 break;
         }
     }
 
-    return pop(stack);
+    return pop(operand);
+}
+
+int priority(char oper) {
+    if (oper == '*' || oper == '/') return 2;
+    else if (oper == '+' || oper == '-') return 1;
+    else return 0;
 }
 
 int main() {
-    Stack *stack1 = create(10);
-    Stack *stack2 = create(10);
-    char *str1 = "12+3*4-";
-    char *str2 = "1234/-*5+6/7+";
+    char *str = "1+2/(3+4)";
 
-    printf("%lf\n", postfix_calculate(str1, stack1));
-    printf("%lf", postfix_calculate(str2, stack2));
-
+    char *postfix_exp = infix_to_postfix(str);
+    /*
+    printf("%lf\n", postfix_calculate(str1));
+    printf("%lf", postfix_calculate(str2));
+    */
     return 0;
 }
