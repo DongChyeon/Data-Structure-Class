@@ -6,21 +6,19 @@
 이진트리의 구현
 <br>inorder, preorder, postorder, levelorder와 같은 순회방법 구현
 
-## DoublyLinkedList
+## LinkedList
+
+<ul>
+  
+### 1. SinglyLinkedList
+
+노드에 포인터가 하나인 단순 연결리스트
+
+### 2. DoublyLinkedList
 
 이중연결리스트의 구현 (원형 연결리스트 형태)
 
-## LinkedList
-
-연결리스트의 구현
-
-## LinkedListQueue
-
-연결리스트를 통한 큐의 구현
-
-## LinkedListStack
-
-연결리스트르 통한 스택의 구현
+</ul>
 
 ## MultiplyTwoArrays
 
@@ -32,7 +30,15 @@
 
 ## Queue
 
+<ul>
+  
+### 1. Array
 배열을 이용한 원형큐의 구현
+
+### 2. LinkedList
+연결리스트를 이용한 큐의 구현
+
+</ul>
 
 ## Sort
 
@@ -44,7 +50,15 @@
 
 ## Stack
 
+<ul>
+  
+### 1. Array
 배열을 이용한 스택의 구현
+
+### 2. LinkedList
+연결리스트를 이용한 스택의 구현
+
+</ul>
 
 ## StackCaculator
 
@@ -52,4 +66,4 @@
 
 ## StringMatching
 
-substr 함수의 구현
+문자열에서 원하는 문자열의 위치 찾기
