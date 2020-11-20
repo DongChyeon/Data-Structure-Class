@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "binaryTree.h"
-#include "queue.h"
 
 BinaryNode makeNode(char elem, int frequency, BinaryNode left, BinaryNode right) {
     BinaryNode node = (BinaryNode)malloc(sizeof(struct binaryNode));
@@ -13,7 +12,7 @@ BinaryNode makeNode(char elem, int frequency, BinaryNode left, BinaryNode right)
     return node;
 }
 
-BinaryTree makeTree(BinaryNode root) {
+BinaryTree makeTree() {
     BinaryTree tree = (BinaryTree)malloc(sizeof(struct binaryTree));
 
     return tree;
@@ -55,19 +54,6 @@ void postorder(BinaryNode node) {
     }
 }
 
-void levelorder(BinaryNode node) {
-    Queue queue = makeQueue();
-    enqueue(queue, node);
-    while (!isQueueEmpty(queue)) {
-        BinaryNode temp = dequeue(queue);
-        if (temp != NULL) {
-            printf("[%c] ", temp->value);
-            enqueue(queue, temp->left);
-            enqueue(queue, temp->right);
-        }
-    }
-}
-
 void printInorder(BinaryTree tree) {
     if (isTreeEmpty(tree)) {
         printf("Tree is empty\n");
@@ -95,15 +81,5 @@ void printPostorder(BinaryTree tree) {
 
     printf("postorder\n");
     postorder(tree->root);
-    printf("\n");
-}
-
-void printLevelorder(BinaryTree tree) {
-    if (isTreeEmpty(tree)) {
-        printf("Tree is empty\n");
-    }
-
-    printf("levelorder\n");
-    levelorder(tree->root);
     printf("\n");
 }

@@ -12,6 +12,10 @@ int main() {
     printHeap(heap);
     printf("deleted : %d\n", deleteElem(heap));
     printHeap(heap);
+    printf("deleted : %d\n", deleteElem(heap));
+    printHeap(heap);
+    printf("deleted : %d\n", deleteElem(heap));
+    printHeap(heap);
 
     return 0;
 }

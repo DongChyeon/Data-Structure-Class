@@ -19,7 +19,7 @@ bool isFull(Heap heap) {
         return false;
 }
 
-bool isEmtpy(Heap heap) {
+bool isEmpty(Heap heap) {
     if (heap->index == 0)
         return true;
     else
@@ -54,7 +54,7 @@ int deleteElem(Heap heap) {
 
     while (1) {
         child = parent * 2;
-        if (child + 1 <= heap->index && heap ->element[child] > heap->element[child + 1]) {
+        if (child + 1 <= heap->index && heap->element[child] > heap->element[child + 1]) {
             child++;
         }
 

@@ -1,17 +1,14 @@
-ArithmeticExp: main.o binaryTree.o queue.o stack.o
-	gcc -o ArithmeticExp main.o binaryTree.o queue.o stack.o
+huffmanTree: main.o binaryTree.o priorityQueue.o
+	gcc -o huffmanTree main.o binaryTree.o priorityQueue.o
 
 binaryTree.o: binaryTree.c binaryTree.h
 	gcc -c binaryTree.c -o binaryTree.o
 
-queue.o: queue.c queue.h
-	gcc -c queue.c -o queue.o 
-
-stack.o: stack.c stack.h
-	gcc -c stack.c -o stack.o
+priorityQueue.o: priorityQueue.c priorityQueue.h
+	gcc -c priorityQueue.c -o priorityQueue.o 
 
 main.o: main.c
 	gcc -c main.c -o main.o
 
 clean:
-	rm -f binaryTreeEx *.o
+	rm huffmanTreeEx *.o
