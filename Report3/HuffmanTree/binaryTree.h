@@ -7,6 +7,7 @@ typedef struct binaryNode* BinaryNode;
 typedef struct binaryTree* BinaryTree;
 typedef struct binaryNode {
     char value;
+    char *code;
     int frequency;
     BinaryNode left;
     BinaryNode right;

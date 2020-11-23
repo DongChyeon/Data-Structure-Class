@@ -2,8 +2,25 @@
 #include <string.h>
 #include "binaryTree.h"
 #include "priorityQueue.h"
+#include "info.h"
 
+void encoding(char *sentnences);
 BinaryTree makeHuffmanTree(char *sentences);
+void makeBinaryCode(BinaryNode node, int i, char *code, BinaryInfo info);
+
+void encoding(char *sentences) {
+    BinaryTree tree = makeHuffmanTree(sentences);
+    char binaryCode[100];
+    BinaryInfo info = makeInfo();
+
+    makeBinaryCode(tree->root, -1, binaryCode, info);
+
+    for (int i = 0; i < strlen(sentences); i++) {
+        printCode(info, sentences[i]);
+    }
+
+    deleteInfo(info);
+}
 
 BinaryTree makeHuffmanTree(char *sentences) {
     int index = 0;
@@ -43,7 +60,26 @@ BinaryTree makeHuffmanTree(char *sentences) {
     }
 
     setRoot(tree, dequeue(queue));
+
     return tree;
+}
+
+void makeBinaryCode(BinaryNode node, int i, char *code, BinaryInfo info) {
+    if (node != NULL) {
+        i++;
+        code[i] = '1';
+        makeBinaryCode(node->left, i, code, info);
+        code[i] = '0';
+        makeBinaryCode(node->right, i, code, info);
+        code[i] = '\0';
+
+        if (node->left == NULL && node->right == NULL) {
+            node->code = code;
+            printf("%c : %s\n", node->value, node->code);
+            addItem(info, node->value, node->code);
+        }
+    }
+
 }
 
 int main() {
@@ -52,11 +88,7 @@ int main() {
     printf("Please enter the sentence : ");
     scanf_s("%[^\n]", &sentences, sizeof(sentences));
 
-    BinaryTree tree = makeHuffmanTree(sentences);
-
-    printInorder(tree);
-    printPreorder(tree);
-    printPostorder(tree);
+    encoding(sentences);
 
     return 0; 
 }
