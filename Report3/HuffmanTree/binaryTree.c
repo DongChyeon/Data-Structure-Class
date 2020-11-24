@@ -18,6 +18,13 @@ BinaryTree makeTree() {
     return tree;
 }
 
+bool isLeaf(BinaryNode node) {
+    if (node->left == NULL && node->right == NULL)
+        return true;
+    else
+        return false;
+}
+
 bool isTreeEmpty(BinaryTree tree) {
     if (tree->root == NULL) {
         return true;

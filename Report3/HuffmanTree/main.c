@@ -4,22 +4,42 @@
 #include "priorityQueue.h"
 #include "info.h"
 
-void encoding(char *sentnences);
+void encoding(char *sentnences, BinaryTree tree);
+void decoding(char *code, BinaryTree tree);
 BinaryTree makeHuffmanTree(char *sentences);
 void makeBinaryCode(BinaryNode node, int i, char *code, BinaryInfo info);
 
-void encoding(char *sentences) {
-    BinaryTree tree = makeHuffmanTree(sentences);
+void encoding(char *sentences, BinaryTree tree) {
     char binaryCode[100];
     BinaryInfo info = makeInfo();
 
     makeBinaryCode(tree->root, -1, binaryCode, info);
 
+    for (int i = 0; i < info->size; i++) {
+        printf("%c : %s\n", info->items[i].character, info->items[i].code);
+    }
+
     for (int i = 0; i < strlen(sentences); i++) {
         printCode(info, sentences[i]);
     }
+    printf("\n");
+}
 
-    deleteInfo(info);
+void decoding(char *code, BinaryTree tree) {
+    BinaryNode temp = tree->root;
+
+    for (int i = 0; i < strlen(code) + 1; i++) {
+        if (isLeaf(temp)) {
+            printf("%c", temp->value);
+            temp = tree->root;
+        }
+
+        if (code[i] == '0') {
+            temp = temp->right;
+        } else if (code[i] == '1') {
+            temp = temp->left;
+        }
+    }
 }
 
 BinaryTree makeHuffmanTree(char *sentences) {
@@ -73,7 +93,7 @@ void makeBinaryCode(BinaryNode node, int i, char *code, BinaryInfo info) {
         makeBinaryCode(node->right, i, code, info);
         code[i] = '\0';
 
-        if (node->left == NULL && node->right == NULL) {
+        if (isLeaf(node)) {
             node->code = code;
             printf("%c : %s\n", node->value, node->code);
             addItem(info, node->value, node->code);
@@ -87,8 +107,11 @@ int main() {
     
     printf("Please enter the sentence : ");
     scanf_s("%[^\n]", &sentences, sizeof(sentences));
+    BinaryTree tree = makeHuffmanTree(sentences);
 
-    encoding(sentences);
+    encoding(sentences, tree);
+    char codes[1000] = "00111101100010000111110101011111000110000101101111101011001111100100110001001100111011110101100011100101010010";
+    decoding(codes, tree);
 
     return 0; 
 }

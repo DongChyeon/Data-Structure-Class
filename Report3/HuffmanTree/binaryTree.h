@@ -19,6 +19,7 @@ typedef struct binaryTree {
 BinaryNode makeNode(char elem, int frequency, BinaryNode left, BinaryNode right);
 
 BinaryTree makeTree();
+bool isLeaf(BinaryNode node);
 bool isTreeEmpty(BinaryTree tree);
 void setRoot(BinaryTree tree, BinaryNode root);
 
