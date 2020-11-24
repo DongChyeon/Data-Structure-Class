@@ -4,12 +4,12 @@
 #include "priorityQueue.h"
 #include "info.h"
 
-void encoding(char *sentnences, BinaryTree tree);
+void encoding(char *sentnences, BinaryTree tree, char *code);
 void decoding(char *code, BinaryTree tree);
 BinaryTree makeHuffmanTree(char *sentences);
 void makeBinaryCode(BinaryNode node, int i, char *code, BinaryInfo info);
 
-void encoding(char *sentences, BinaryTree tree) {
+void encoding(char *sentences, BinaryTree tree, char *code) {
     char binaryCode[100];
     BinaryInfo info = makeInfo();
 
@@ -20,7 +20,8 @@ void encoding(char *sentences, BinaryTree tree) {
     }
 
     for (int i = 0; i < strlen(sentences); i++) {
-        printCode(info, sentences[i]);
+        printf("%s", searchCode(info, sentences[i]));
+        strcat_s(code, sizeof(char) * 1024, searchCode(info, sentences[i]));
     }
     printf("\n");
 }
@@ -35,9 +36,9 @@ void decoding(char *code, BinaryTree tree) {
         }
 
         if (code[i] == '0') {
-            temp = temp->right;
-        } else if (code[i] == '1') {
             temp = temp->left;
+        } else if (code[i] == '1') {
+            temp = temp->right;
         }
     }
 }
@@ -87,15 +88,14 @@ BinaryTree makeHuffmanTree(char *sentences) {
 void makeBinaryCode(BinaryNode node, int i, char *code, BinaryInfo info) {
     if (node != NULL) {
         i++;
-        code[i] = '1';
-        makeBinaryCode(node->left, i, code, info);
         code[i] = '0';
+        makeBinaryCode(node->left, i, code, info);
+        code[i] = '1';
         makeBinaryCode(node->right, i, code, info);
         code[i] = '\0';
 
         if (isLeaf(node)) {
             node->code = code;
-            printf("%c : %s\n", node->value, node->code);
             addItem(info, node->value, node->code);
         }
     }
@@ -104,14 +104,16 @@ void makeBinaryCode(BinaryNode node, int i, char *code, BinaryInfo info) {
 
 int main() {
     char sentences[256];
+    char code[1024] = "";
     
     printf("Please enter the sentence : ");
     scanf_s("%[^\n]", &sentences, sizeof(sentences));
     BinaryTree tree = makeHuffmanTree(sentences);
 
-    encoding(sentences, tree);
-    char codes[1000] = "00111101100010000111110101011111000110000101101111101011001111100100110001001100111011110101100011100101010010";
-    decoding(codes, tree);
+    printf("After Encoding\n");
+    encoding(sentences, tree, code);
+    printf("\nAfter Decoding\n");
+    decoding(code, tree);
 
     return 0; 
 }

@@ -14,6 +14,6 @@ typedef struct binaryInfo {
 BinaryInfo makeInfo();
 void addItem(BinaryInfo info, char character, char* code);
 void deleteInfo(BinaryInfo info);
-void printCode(BinaryInfo info, char character);
+char* searchCode(BinaryInfo info, char character);
 
 #endif

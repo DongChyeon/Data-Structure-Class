@@ -22,11 +22,10 @@ void deleteInfo(BinaryInfo info) {
     free(info);
 }
 
-void printCode(BinaryInfo info, char character) {
+char* searchCode(BinaryInfo info, char character) {
     for (int i = 0; i < info->size; i++) {
         if (info->items[i].character == character) {
-            printf("%s", info->items[i].code);
-            return;
+            return info->items[i].code;
         }
     }
 }
