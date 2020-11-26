@@ -13,4 +13,6 @@ int main() {
     graph.insertEdge(2, 3);
     printf("Adjacency matrix graph\n");
     graph.display();
+
+    return 0;
 }
