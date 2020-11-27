@@ -13,6 +13,8 @@ int main() {
     graph.insertEdge(2, 3);
     printf("Adjacency list graph\n");
     graph.display();
+    printf("DFS ==> ");
+    graph.DFS(0);
 
     return 0;
 }
