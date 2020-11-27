@@ -5,7 +5,7 @@ protected:
     int id;
     Node* link;
 public:
-    Node(int i, Node *link);
+    Node(int id, Node *link);
     ~Node();
     int getId();
     Node* getLink();

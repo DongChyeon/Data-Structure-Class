@@ -1,8 +1,8 @@
 #include "node.h"
 
-Node::Node(int i, Node *l) {
-    id = i;
-    link = l;
+Node::Node(int id, Node *link) {
+    this->id = id;
+    this->link = link;
 }
 
 Node::~Node() {

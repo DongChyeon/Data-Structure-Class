@@ -35,7 +35,6 @@ void Graph::insertEdge(int u, int v) {
 }
 
 void Graph::display() {
-    printf("%d\n", size);
     for (int i = 0; i < size; i++) {
         printf("%c ", getVertex(i));
         for (Node *v = mat[i]; v != NULL; v = v->getLink()) {
