@@ -3,7 +3,7 @@
 
 int main() {
     char sentences[512];
-    char code[2048] = "";
+    char code[5120] = "";
     
     printf("Please enter the sentence : ");
     scanf_s("%[^\n]", &sentences, sizeof(sentences));

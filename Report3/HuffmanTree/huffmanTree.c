@@ -53,7 +53,7 @@ void encoding(char *sentences, BinaryTree tree, char *code) {
 
     for (int i = 0; i < strlen(sentences); i++) {
         printf("%s", searchCode(info, sentences[i]));
-        strcat_s(code, sizeof(char) * 1024, searchCode(info, sentences[i]));
+        strcat_s(code, sizeof(char) * 5120, searchCode(info, sentences[i]));
     }
     printf("\n");
 }
