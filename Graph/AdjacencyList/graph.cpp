@@ -9,7 +9,6 @@ Graph::~Graph() {
 
 void Graph::reset() {
     for (int i = 0; i < size; i++) {
-        visited[i] = false;
         if (mat[i] != NULL)
             delete mat[i];
     }
@@ -18,14 +17,14 @@ void Graph::reset() {
 
 bool Graph::isEmpty() { return size == 0; }
 bool Graph::isFull() { return size >= MAX_VTXS; }
-char Graph::getVertex(int i) { return vertices[i]; }
+int Graph::getVertex(int i) { return vertices[i]; }
 
-void Graph::insertVertex(char val) {
+void Graph::insertVertex(int val) {
     if (!isFull()) {
         vertices[size] = val;
         mat[size++] = NULL;
     } else {
-        printf("Error : Graph is full\n");
+        cout << "Error : Graph is full\n";
     }
 }
 
@@ -36,11 +35,11 @@ void Graph::insertEdge(int u, int v) {
 
 void Graph::display() {
     for (int i = 0; i < size; i++) {
-        printf("%c ", getVertex(i));
+        cout << "V" << getVertex(i) << " ";
         for (Node *v = mat[i]; v != NULL; v = v->getLink()) {
-            printf("    %c", getVertex(v->getId()));
+            cout << "   " << getVertex(v->getId());
         }
-        printf("\n");
+        cout << endl;
     }
 }
 
@@ -53,14 +52,36 @@ bool Graph::isLinked(int vertice1, int vertice2) {
 
 void Graph::DFS(int vertice) {
     visited[vertice] = true;
-    printf("%c ", getVertex(vertice));
+    cout << "V" << getVertex(vertice) << " ";
 
     for (Node *v = mat[vertice]; v != NULL; v = v->getLink()) {
         if (visited[v->getId()] == false) DFS(v->getId());
     }
 }
 
+void Graph::BFS(int vertice) {
+    visited[vertice] = true;
+    cout << "V" << getVertex(vertice) << " ";
 
-Node* Graph::adjacent(int v) {
-    return mat[v];
+    queue<int> queue;
+    queue.push(vertice);
+
+    while (!queue.empty()) {
+        int vertice = queue.front();
+        queue.pop();
+        for (Node *v = mat[vertice]; v != NULL; v = v->getLink()) {
+            int id = v->getId();
+            if (!visited[id]) {
+                visited[id] = true;
+                cout << "V" << getVertex(id) << " ";
+                queue.push(id);
+            }
+        }
+    }
+}
+
+void Graph::resetVisited() {
+    for (int i = 0; i < size; i++) {
+        visited[i] = false;
+    }
 }

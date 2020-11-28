@@ -1,7 +1,8 @@
-#include <cstdio>
+#include <iostream>
+using namespace std;
 
 class Node {
-protected:
+private:
     int id;
     Node* link;
 public:

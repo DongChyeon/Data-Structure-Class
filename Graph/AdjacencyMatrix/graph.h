@@ -1,15 +1,17 @@
-#include <cstdio>
+#include <iostream>
+#include <queue>
 #define MAX_VTXS 256
+using namespace std;
 
 class Graph {
-protected:
+private:
     int size;
-    char vertices[MAX_VTXS];
+    int vertices[MAX_VTXS];
     int mat[MAX_VTXS][MAX_VTXS];
     bool visited[MAX_VTXS];
 public:
     Graph();
-    char getVertex(int i);
+    int getVertex(int i);
     int getEdge(int i, int j);
     void setEdge(int i, int j, int val);
 
@@ -17,10 +19,12 @@ public:
     bool isFull();
     void reset();
 
-    void insertVertex(char name);
+    void insertVertex(int val);
     void insertEdge(int vertice1, int vertice2);
     void display();
 
     bool isLinked(int vertice1, int vertice2);
     void DFS(int vertice);
+    void BFS(int vertice);
+    void resetVisited();
 };

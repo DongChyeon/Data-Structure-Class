@@ -1,7 +1,8 @@
 #include <stdbool.h>
+#include "info.h"
 
-#ifndef _BINARY_TREE_
-#define _BINARY_TREE_
+#ifndef _HUFFMAN_TREE_
+#define _HUFFMAN_TREE_
 
 typedef struct binaryNode* BinaryNode;
 typedef struct binaryTree* BinaryTree;
@@ -22,13 +23,9 @@ BinaryTree makeTree();
 bool isLeaf(BinaryNode node);
 bool isTreeEmpty(BinaryTree tree);
 void setRoot(BinaryTree tree, BinaryNode root);
-
-void inorder(BinaryNode node);
-void preorder(BinaryNode node);
-void postorder(BinaryNode node);
-
-void printInorder(BinaryTree tree);
-void printPreorder(BinaryTree tree);
-void printPostorder(BinaryTree tree);
+void encoding(char *sentnences, BinaryTree tree, char *code);
+void decoding(char *code, BinaryTree tree);
+BinaryTree makeHuffmanTree(char *sentences);
+void makeBinaryCode(BinaryNode node, int i, char *code, BinaryInfo info);
 
 #endif

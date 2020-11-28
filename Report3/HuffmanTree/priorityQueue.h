@@ -1,5 +1,5 @@
 #include <stdbool.h>
-#include "binaryTree.h"
+#include "huffmanTree.h"
 
 #ifndef _PRIORITY_QUEUE_
 #define _PRIORITY_QUEUE_

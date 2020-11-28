@@ -1,8 +1,8 @@
-huffmanTree: main.o binaryTree.o priorityQueue.o info.o
-	gcc -o huffmanTree main.o binaryTree.o priorityQueue.o info.o
+huffmanTree: main.o huffmanTree.o priorityQueue.o info.o
+	gcc -o huffmanTree main.o huffmanTree.o priorityQueue.o info.o
 
-binaryTree.o: binaryTree.c binaryTree.h
-	gcc -c binaryTree.c -o binaryTree.o
+huffmanTree.o: huffmanTree.c huffmanTree.h
+	gcc -c huffmanTree.c -o huffmanTree.o
 
 priorityQueue.o: priorityQueue.c priorityQueue.h
 	gcc -c priorityQueue.c -o priorityQueue.o 

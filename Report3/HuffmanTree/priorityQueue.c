@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "priorityQueue.h"
-#include "binaryTree.h"
+#include "huffmanTree.h"
 
 Queue makeQueue(int n) {
     Queue queue = (Queue) malloc(sizeof(Queue));

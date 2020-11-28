@@ -3,18 +3,22 @@
 int main() {
     Graph graph;
 
-    for (int i = 0; i < 4; i++) {
-        graph.insertVertex('A' + i);
+    for (int i = 1; i < 5; i++) {
+        graph.insertVertex(i);
     }
     graph.insertEdge(0, 1);
     graph.insertEdge(0, 3);
     graph.insertEdge(1, 2);
     graph.insertEdge(1, 3);
     graph.insertEdge(2, 3);
-    printf("Adjacency matrix graph\n");
+    cout << "Adjacency matrix graph\n";
     graph.display();
-    printf("DFS ==> ");
+    cout << "DFS ==> ";
+    graph.resetVisited();
     graph.DFS(0);
+    cout << "\nBFS ==> ";
+    graph.resetVisited();
+    graph.BFS(0);
 
     return 0;
 }

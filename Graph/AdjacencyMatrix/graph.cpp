@@ -1,8 +1,7 @@
-#include <cstdio>
 #include "graph.h"
 
 Graph::Graph() { reset(); }
-char Graph::getVertex(int i) { return vertices[i]; } 
+int Graph::getVertex(int i) { return vertices[i]; } 
 int Graph::getEdge(int i, int j) { return mat[i][j]; }
 void Graph::setEdge(int i, int j, int val) { mat[i][j] = val; }
 
@@ -10,9 +9,6 @@ bool Graph::isEmpty()  { return size == 0; }
 bool Graph::isFull() { return size >= MAX_VTXS; }
 
 void Graph::reset() {
-    for (int i = 0; i < size; i++) {
-        visited[i] = false;
-    }
     for (int i = 0; i < MAX_VTXS; i++) {
         for (int j = 0; j < MAX_VTXS; j++) {
             setEdge(i, j, 0);
@@ -21,11 +17,11 @@ void Graph::reset() {
     size = 0;
 }
 
-void Graph::insertVertex(char name) {
+void Graph::insertVertex(int val) {
     if (!isFull()) 
-        vertices[size++] = name;
+        vertices[size++] = val;
     else
-        printf("Error: 그래프 정점 개수 초과\n");
+        cout << "Error: 그래프 정점 개수 초과\n";
 }
 
 void Graph::insertEdge(int vertice1, int vertice2) {
@@ -35,11 +31,11 @@ void Graph::insertEdge(int vertice1, int vertice2) {
 
 void Graph::display() {
     for (int i = 0; i < size; i++) {
-        printf("%c ", getVertex(i));
+        cout << getVertex(i) << " ";
         for (int j = 0; j < size; j++) {
-            printf(" %3d", getEdge(i, j));
+            cout << " " << getEdge(i, j);
         }
-        printf("\n");
+        cout << endl;
     }
 }
 
@@ -49,11 +45,37 @@ bool Graph::isLinked(int vertice1, int vertice2) {
 
 void Graph::DFS(int vertice) {
     visited[vertice] = true;
-    printf("%c ", getVertex(vertice));
+    cout << "V" << getVertex(vertice) << " ";
 
     for (int i = 0; i < size; i++) {
         if (isLinked(vertice, i) && visited[i] == false) {
             DFS(i);
         }
+    }
+}
+
+void Graph::BFS(int vertice) {
+    visited[vertice] = true;
+    cout << "V" << getVertex(vertice) << " ";
+
+    queue<int> queue;
+    queue.push(vertice);
+
+    while (!queue.empty()) {
+        int v = queue.front();
+        queue.pop();
+        for (int i = 0; i < size; i++) {
+            if (isLinked(v, i) && visited[i] == false) {
+                visited[i] = true;
+                cout << "V" << getVertex(i) << " ";
+                queue.push(i);
+            }
+        }
+    }
+}
+
+void Graph::resetVisited() {
+    for (int i = 0; i < size; i++) {
+        visited[i] = false;
     }
 }
