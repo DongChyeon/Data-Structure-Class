@@ -15,5 +15,6 @@ void erase(Poly poly);
 Poly poly_add(Poly a, Poly b);
 Poly poly_sub(Poly a, Poly b);
 int COMPARE(int a, int b);
+Poly makeRandomPoly(int degree, int coef, int count, unsigned int seed);
 
 #endif

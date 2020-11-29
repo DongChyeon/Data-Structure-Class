@@ -1,35 +1,41 @@
 #include <stdio.h>
+#include <time.h>
 #include "polynomial.h"
+
+long getCurrentTime(void)
+{
+  clock_t start;
+  start = clock();
+  return ((long)((double)start * 1000000000.0 / (double)CLOCKS_PER_SEC));
+}
 
 int main() {
     Poly a, b, c;
+    int seed = time(NULL);
+    long start, end;
 
-    a = makePoly(14);
-    b = makePoly(14);
-    
-    append(3, 14, a);
-    append(4, 10, a);
-    append(2, 8, a);
-    append(3, 6, a);
-    append(1, 0, a);    
-    
-    append(8, 14, b);
-    append(3, 10, b);
-    append(10, 6, b);
-    append(2, 3, b);
-    append(5, 0, b);
+    for (int i = 0; i < 5; i++) {
+        a = makeRandomPoly(20, 50, 10, seed + i);
+        b = makeRandomPoly(20, 50, 10, seed + i * 10);
 
-    c = poly_add(a, b);
+        start = getCurrentTime();
+        c = poly_add(a, b);
+        end = getCurrentTime();
 
-    printPoly(a);
-    printPoly(b);
-    printPoly(c);
+        printPoly(a);
+        printPoly(b);
+        printPoly(c);
+        printf("Execution time : %ld ns\n\n", end - start);
 
-    c = poly_sub(a,b);
+        start = getCurrentTime();
+        c = poly_sub(a,b);
+        end = getCurrentTime();
 
-    printPoly(a);
-    printPoly(b);
-    printPoly(c);
+        printPoly(a);
+        printPoly(b);
+        printPoly(c);
+        printf("Execution time : %ld ns\n\n", end - start);
+    }
 
     return 0;
 }

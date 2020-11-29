@@ -7,12 +7,12 @@ Poly makePoly(int degree) {
     
     poly = (Poly)malloc(sizeof(struct poly));
     if (poly == NULL) {
-        fprintf(stderr, "The memory is full\n");
+        printf("The memory is full\n");
         exit(1);
     }
     poly->degree = degree;
-    poly->coef = (int*)malloc(sizeof(int) * (degree + 1));
-    for (int i = 0; i < poly->degree; i++) {
+    poly->coef = (int *)malloc(sizeof(int) * (degree + 1));
+    for (int i = 0; i < poly->degree + 1; i++) {
         poly->coef[i] = 0;
     }
 
@@ -28,8 +28,7 @@ void printPoly(Poly poly) {
                 printf(" %d", poly->coef[i]);
             else if (poly->coef[i] > 0)
                 printf(" + %d", poly->coef[i]);
-        }
-        else {
+        } else {
             if (poly->coef[i] < 0)
                 printf(" %dx^%d", poly->coef[i], i);
             else if (poly->coef[i] > 0)
@@ -97,4 +96,22 @@ int COMPARE(int a, int b) {
     if (a < b) return -1;
     else if (a > b) return 1;
     else return 0;
+}
+
+Poly makeRandomPoly(int degree, int coef, int count, unsigned int seed) {
+    Poly poly = makePoly(degree);
+
+    int cnt = 0;
+    int randomCoef, randomExpon;
+    while (cnt < count) {
+        srand(++seed);
+        randomCoef = rand() % (coef * 2) - coef;
+        randomExpon = rand() % degree + 1;
+        if (poly->coef[randomExpon] == 0) {
+            cnt++;
+            append(randomCoef, randomExpon, poly);
+        }
+    }
+
+    return poly;
 }
