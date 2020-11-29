@@ -28,8 +28,8 @@ void printPoly(poly_node node) {
             printf(" + %d", temp->coef);
         else if (temp->expon == 0 && temp->coef < 0)
             printf(" - %d", temp->coef);
-        else if (temp->expon < 0)
-            printf(" - %dx^%d", temp->coef, temp->expon);
+        else if (temp->coef < 0)
+            printf(" - %dx^%d", -temp->coef, temp->expon);
         else
             printf(" + %dx^%d", temp->coef, temp->expon);
         temp = temp->link;
@@ -41,7 +41,7 @@ void append(int coef, int expon, poly_node ptr) {
     poly_node temp;
     temp = (poly_node)malloc(sizeof(struct term_node));
     if (temp == NULL) {
-        fprintf(stderr, "The memory is full\n");
+        printf("The memory is full\n");
         exit(1);
     }
     temp->coef = coef;
@@ -154,4 +154,19 @@ int COMPARE(int a, int b) {
     if (a < b) return -1;
     else if (a > b) return 1;
     else return 0;
+}
+
+poly_node makeRandomPoly(int coef, int count, unsigned int seed) {
+    poly_node node = makePoly();
+
+    int randomCoef;
+    int expon = count;
+    for (int i = 0; i < count; i++) {
+        srand(++seed);
+        randomCoef = rand() % (coef * 2) - coef;
+        append(randomCoef, expon, node);
+        expon--;
+    }
+
+    return node;
 }

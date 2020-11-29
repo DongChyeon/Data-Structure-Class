@@ -18,5 +18,6 @@ void erase(poly_node ptr);
 poly_node poly_add(poly_node a, poly_node b);
 poly_node poly_sub(poly_node a, poly_node b);
 int COMPARE(int a, int b);
+poly_node makeRandomPoly(int coef, int count, unsigned int seed);
 
 #endif
