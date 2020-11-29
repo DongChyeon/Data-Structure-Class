@@ -20,11 +20,14 @@ public:
     void reset();
 
     void insertVertex(int val);
-    void insertEdge(int vertice1, int vertice2);
+    void insertEdge(int vertice1, int vertice2, int weight);
     void display();
 
+    bool hasEdge(int vertice1, int vertice2);
     bool isLinked(int vertice1, int vertice2);
     void DFS(int vertice);
     void BFS(int vertice);
     void resetVisited();
+
+    void kruskal();
 };

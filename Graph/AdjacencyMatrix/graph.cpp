@@ -1,4 +1,6 @@
 #include "graph.h"
+#include "vertexsets.h"
+#include "minHeap.h"
 
 Graph::Graph() { reset(); }
 int Graph::getVertex(int i) { return vertices[i]; } 
@@ -21,12 +23,11 @@ void Graph::insertVertex(int val) {
     if (!isFull()) 
         vertices[size++] = val;
     else
-        cout << "Error: 그래프 정점 개수 초과\n";
+        cout << "Error: graph's edge is full\n";
 }
 
-void Graph::insertEdge(int vertice1, int vertice2) {
-    setEdge(vertice1, vertice2, 1);
-    setEdge(vertice2, vertice1, 1);
+void Graph::insertEdge(int vertice1, int vertice2, int weight) {
+    setEdge(vertice1, vertice2, weight);
 }
 
 void Graph::display() {
@@ -37,6 +38,10 @@ void Graph::display() {
         }
         cout << endl;
     }
+}
+
+bool Graph::hasEdge(int vertice1, int vertice2) {
+    return (getEdge(vertice1, vertice2) > 0);
 }
 
 bool Graph::isLinked(int vertice1, int vertice2) {
@@ -77,5 +82,27 @@ void Graph::BFS(int vertice) {
 void Graph::resetVisited() {
     for (int i = 0; i < size; i++) {
         visited[i] = false;
+    }
+}
+
+void Graph::kruskal() {
+    MinHeap heap;
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = i + 1; j < size; j++) {
+            if (hasEdge(i, j)) heap.insert(getEdge(i, j), i, j);
+        }
+    }
+
+    VertexSets set(size);
+    int edgeAccepted = 0;
+    while (edgeAccepted < size - 1) {
+        HeapNode node = heap.remove();
+        int set1 = set.findSet(node.getVertice1());
+        int set2 = set.findSet(node.getVertice2());
+        if (set1 != set2) {
+            cout << "Add Edge : " << getVertex(node.getVertice1()) << " - " << getVertex(node.getVertice2()) << " cost : " << node.getKey() << endl;
+            set.unionSets(set1, set2);
+            edgeAccepted++;
+        }
     }
 }

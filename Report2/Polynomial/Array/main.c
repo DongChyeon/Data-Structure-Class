@@ -36,6 +36,9 @@ int main() {
         printPoly(c);
         printf("Execution time : %ld ns\n\n", end - start);
     }
+    erase(a);
+    erase(b);
+    erase(c);
 
     return 0;
 }
