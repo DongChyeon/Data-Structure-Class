@@ -32,7 +32,7 @@ void Graph::insertEdge(int vertice1, int vertice2, int weight) {
 
 void Graph::display() {
     for (int i = 0; i < size; i++) {
-        cout << getVertex(i) << " ";
+        cout << "V" << getVertex(i) << " ";
         for (int j = 0; j < size; j++) {
             cout << " " << getEdge(i, j);
         }

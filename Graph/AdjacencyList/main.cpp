@@ -3,7 +3,7 @@
 int main() {
     Graph graph;
 
-    for (int i = 1; i < 5; i++) {
+    for (int i = 0; i < 4; i++) {
         graph.insertVertex(i);
     }
     graph.insertEdge(0, 1, 2);
@@ -16,9 +16,12 @@ int main() {
     cout << "DFS ==> ";
     graph.resetVisited();
     graph.DFS(0);
-    cout << "\nBFS == > ";
+    cout << "\nBFS ==> ";
     graph.resetVisited();
     graph.BFS(0);
+    graph.kruskal();
+    cout << endl;
+    graph.prim(0);
 
     return 0;
 }

@@ -3,7 +3,7 @@
 int main() {
     Graph graph;
 
-    for (int i = 1; i < 5; i++) {
+    for (int i = 0; i < 4; i++) {
         graph.insertVertex(i);
     }
     graph.insertEdge(0, 1, 2);
@@ -21,6 +21,4 @@ int main() {
     graph.BFS(0);
     cout << endl;
     graph.kruskal();
-
-    return 0;
 }
