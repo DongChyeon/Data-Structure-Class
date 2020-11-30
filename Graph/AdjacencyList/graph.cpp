@@ -41,9 +41,9 @@ void Graph::insertEdge(int vtx1, int vtx2, int weight) {
 
 void Graph::printGraph() {
     for (int i = 0; i < size; i++) {
-        cout << "V" << getVertex(i) << " ";
+        cout << "Node" << getVertex(i) << " ";
         for (Node *v = mat[i]; v != NULL; v = v->getLink()) {
-            cout << "   V" << getVertex(v->getId()) << '[' << v->getWeight() << ']';
+            cout << "   Node" << getVertex(v->getId()) << '[' << v->getWeight() << ']';
         }
         cout << endl;
     }
@@ -58,7 +58,7 @@ bool Graph::isLinked(int vtx1, int vtx2) {
 
 void Graph::DFS(int vtx) {
     visited[vtx] = true;
-    cout << "V" << getVertex(vtx) << " ";
+    cout << "Node" << getVertex(vtx) << " ";
 
     for (Node *v = mat[vtx]; v != NULL; v = v->getLink()) {
         if (visited[v->getId()] == false) DFS(v->getId());
@@ -67,7 +67,7 @@ void Graph::DFS(int vtx) {
 
 void Graph::BFS(int vtx) {
     visited[vtx] = true;
-    cout << "V" << getVertex(vtx) << " ";
+    cout << "Node" << getVertex(vtx) << " ";
 
     queue<int> queue;
     queue.push(vtx);
@@ -79,7 +79,7 @@ void Graph::BFS(int vtx) {
             int id = v->getId();
             if (!visited[id]) {
                 visited[id] = true;
-                cout << "V" << getVertex(id) << " ";
+                cout << "Node" << getVertex(id) << " ";
                 queue.push(id);
             }
         }

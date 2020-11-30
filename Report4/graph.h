@@ -1,25 +1,38 @@
 #include "node.h"
+#include "minHeap.h"
+#include "vertexSets.h"
 #include <queue>
 #define MAX_VTXS 256
 
 class Graph {
 private:
     int size;
+    int edgeCount;
     int vertices[MAX_VTXS];
     Node* mat[MAX_VTXS];
     bool visited[MAX_VTXS];
+    int label[MAX_VTXS];
 public:
     Graph();
     ~Graph();
     void reset();
     bool isEmpty();
     bool isFull();
-    int getVertex(int i);
+    int getVertex(int id);
+    int getEdge(int vtx1, int vtx2);
     void insertVertex(int val);
-    void insertEdge(int u, int v, int weight);
+    void insertEdge(int vtx1, int vtx2, int weight);
     void printGraph();
-    bool isLinked(int vertice1, int vertice2);
-    void DFS(int vertice);
-    void BFS(int vertice);
+    bool isLinked(int vtx1, int vtx2);
+
+    void DFS(int vtx);
+    void adjSearch(int vtx);
+    void BFS(int vtx);
     void resetVisited();
+
+    void kruskal();
+    void prim(int vtx);
+
+    void labelDFS(int vtx, int color);
+    void findConnectedComponent();
 };
