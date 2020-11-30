@@ -17,17 +17,16 @@ public:
     bool isEmpty();
     bool isFull();
     int getVertex(int id);
-    int getEdge(int vertice1, int vertice2);
+    int getEdge(int vtx1, int vtx2);
     void insertVertex(int val);
-    void insertEdge(int vertice1, int vertice2, int weight);
+    void insertEdge(int vtx1, int vtx2, int weight);
     void printGraph();
-    bool isLinked(int vertice1, int vertice2);
+    bool isLinked(int vtx1, int vtx2);
 
-    void DFS(int vertice);
-    void BFS(int vertice);
+    void DFS(int vtx);
+    void BFS(int vtx);
     void resetVisited();
 
     void kruskal();
-    void prim(int vertice);
-    int getMinVertex(bool* selected, int* dist);
+    void prim(int vtx);
 };

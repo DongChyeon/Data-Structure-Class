@@ -3,13 +3,13 @@
 class HeapNode {
 private:
     int key;
-    int vertice1;
-    int vertice2;
+    int vtx1;
+    int vtx2;
 public:
     HeapNode();
-    HeapNode(int key, int vertice1, int vertice2);
-    void setKey(int key, int vertice1, int vertice2);
+    HeapNode(int key, int vtx1, int vtx2);
+    void setKey(int key, int vtx1, int vtx2);
     int getKey();
-    int getVertice1();
-    int getVertice2();
+    int getVtx1();
+    int getVtx2();
 };

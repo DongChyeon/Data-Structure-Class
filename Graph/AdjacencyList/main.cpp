@@ -20,7 +20,6 @@ int main() {
     graph.resetVisited();
     graph.BFS(0);
     graph.kruskal();
-    cout << endl;
     graph.prim(0);
 
     return 0;

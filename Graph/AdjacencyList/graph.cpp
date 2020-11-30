@@ -19,10 +19,9 @@ bool Graph::isEmpty() { return size == 0; }
 bool Graph::isFull() { return size >= MAX_VTXS; }
 
 int Graph::getVertex(int id) { return vertices[id]; }
-int Graph::getEdge(int vertice1, int vertice2) {
-    int vertex = getVertex(vertice1);
-    for (Node *v = mat[vertex]; v != NULL; v = v->getLink()) {
-        if (v->getId() == vertice2) return v->getWeight();
+int Graph::getEdge(int vtx1, int vtx2) {
+    for (Node *v = mat[vtx1]; v != NULL; v = v->getLink()) {
+        if (v->getId() == vtx2) return v->getWeight();
     }
 }
 
@@ -35,9 +34,9 @@ void Graph::insertVertex(int val) {
     }
 }
 
-void Graph::insertEdge(int vertice1, int vertice2, int weight) {
-    mat[vertice1] = new Node(vertice2, mat[vertice1], weight);
-    mat[vertice2] = new Node(vertice1, mat[vertice2], weight);
+void Graph::insertEdge(int vtx1, int vtx2, int weight) {
+    mat[vtx1] = new Node(vtx2, mat[vtx1], weight);
+    mat[vtx2] = new Node(vtx1, mat[vtx2], weight);
 }
 
 void Graph::printGraph() {
@@ -50,28 +49,28 @@ void Graph::printGraph() {
     }
 }
 
-bool Graph::isLinked(int vertice1, int vertice2) {
-    for (Node *v = mat[vertice1]; v != NULL; v = v->getLink()) {
-        if (v->getId() == vertice2) return true;
+bool Graph::isLinked(int vtx1, int vtx2) {
+    for (Node *v = mat[vtx1]; v != NULL; v = v->getLink()) {
+        if (v->getId() == vtx2) return true;
     }
     return false;
 }
 
-void Graph::DFS(int vertice) {
-    visited[vertice] = true;
-    cout << "V" << getVertex(vertice) << " ";
+void Graph::DFS(int vtx) {
+    visited[vtx] = true;
+    cout << "V" << getVertex(vtx) << " ";
 
-    for (Node *v = mat[vertice]; v != NULL; v = v->getLink()) {
+    for (Node *v = mat[vtx]; v != NULL; v = v->getLink()) {
         if (visited[v->getId()] == false) DFS(v->getId());
     }
 }
 
-void Graph::BFS(int vertice) {
-    visited[vertice] = true;
-    cout << "V" << getVertex(vertice) << " ";
+void Graph::BFS(int vtx) {
+    visited[vtx] = true;
+    cout << "V" << getVertex(vtx) << " ";
 
     queue<int> queue;
-    queue.push(vertice);
+    queue.push(vtx);
 
     while (!queue.empty()) {
         int vertice = queue.front();
@@ -95,68 +94,48 @@ void Graph::resetVisited() {
 }
 
 void Graph::kruskal() {
+    cout << "Kruskal Algorithm" << endl;
+
     MinHeap heap;
     for (int i = 0; i < size; i++) {
-        int vertice1 = getVertex(i);
+        int vtx1 = getVertex(i);
         for (Node *v = mat[i]; v != NULL; v = v->getLink()) {
-            cout << vertice1 << " " << v->getId() << " [" << v->getWeight() << "]\n";
-            heap.insert(v->getWeight(), vertice1, v->getId());
+            heap.insert(v->getWeight(), vtx1, v->getId());
         }
     }
 
     VertexSets set(size);
     int edgeAccepted = 0;
-    cout << "Kruskal Algorithm" << endl;
     while (edgeAccepted < size - 1) {
         HeapNode node = heap.remove();
-        int set1 = set.findSet(node.getVertice1());
-        int set2 = set.findSet(node.getVertice2());
+        int set1 = set.findSet(node.getVtx1());
+        int set2 = set.findSet(node.getVtx2());
         if (set1 != set2) {
-            cout << "Add Edge : " << getVertex(node.getVertice1()) << " - " << getVertex(node.getVertice2()) << " cost : " << node.getKey() << endl;
+            cout << "Add Edge : " << getVertex(node.getVtx1()) << " - " << getVertex(node.getVtx2()) << " cost : " << node.getKey() << endl;
             set.unionSets(set1, set2);
             edgeAccepted++;
         }
     }
 }
 
-void Graph::prim(int vertice) {
+void Graph::prim(int vtx) {
+    cout << "Prim Algorithm" << endl;
+
     bool selected[MAX_VTXS];
-    int dist[MAX_VTXS];
-    int prev = vertice;
-    for (int i = 0; i < size; i++) {
-        dist[i] = 9999;
-        selected[i] = false;
-    }
-    dist[vertice] = 0;
+    int prev = vtx;
+    int next;
+    for (int i = 0; i < size; i++) selected[i] = false;
+    selected[getVertex(vtx)] = true;
 
-    for (int i = 0; i < size; i++) {
-        int min = getMinVertex(selected, dist);
-
-        selected[min] = true;
-        if (dist[min] == 9999) return;
-
-        cout << "Add Edge : " << prev << " - " << getVertex(min) << endl;
-        prev = getVertex(min);
-
-        for (int i = 0; i < size; i++) {
-            if (getEdge(min, i) != 9999) {
-                if (!selected[i] && getEdge(min, i) < dist[i])
-                    dist[i] = getEdge(min, i);
+    for (int i = 0; i < size - 1; i++) {
+        int minDist = 9999;
+        for (Node *v = mat[prev]; v != NULL; v = v->getLink()) {
+            if (v->getWeight() < minDist && !selected[v->getId()]) {
+                minDist = v->getWeight();
+                next = v->getId();
             }
         }
+        cout << "Add Edge : " << prev << " - " << next << " cost : " << minDist << endl;
+        prev = next;
     }
-    cout << endl;
-}
-
-int Graph::getMinVertex(bool* selected, int* dist) {
-    int minVertex = 0;
-    int minDist = 9999;
-    for (int i = 0; i < size; i++) {
-        if (!selected[i] && dist[i] < minDist) {
-            minDist = dist[i];
-            minVertex = i;
-        }
-    }
-
-    return minVertex;
 }

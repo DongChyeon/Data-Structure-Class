@@ -12,6 +12,6 @@ public:
     HeapNode& getParent(int id);
     HeapNode& getLeft(int id);
     HeapNode& getRight(int id);
-    void insert(int key, int vertice1, int vertice2);
+    void insert(int key, int vtx1, int vtx2);
     HeapNode remove();
 };

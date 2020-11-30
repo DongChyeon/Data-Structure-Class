@@ -7,14 +7,14 @@ HeapNode& MinHeap::getParent(int id) { return node[id / 2]; }
 HeapNode& MinHeap::getLeft(int id) { return node[id * 2]; }
 HeapNode& MinHeap::getRight(int id) { return node[id * 2 + 1];}
 
-void MinHeap::insert(int key, int vertice1, int vertice2) {
+void MinHeap::insert(int key, int vtx1, int vtx2) {
     if (isFull()) return;
     int id = ++size;
     while (id != 1 && key < getParent(id).getKey()) {
         node[id] = getParent(id);
         id /= 2;
     }
-    node[id].setKey(key, vertice1, vertice2);
+    node[id].setKey(key, vtx1, vtx2);
 }
 
 HeapNode MinHeap::remove() {
