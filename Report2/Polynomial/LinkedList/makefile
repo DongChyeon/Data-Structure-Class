@@ -1,5 +1,5 @@
-polynomialEx: main.o polynomial.o
-	gcc -o polynomialEx main.o polynomial.o
+polynomial: main.o polynomial.o
+	gcc -o polynomial main.o polynomial.o
 
 polynomial.o: polynomial.c polynomial.h
 	gcc -c polynomial.c -o polynomial.o 

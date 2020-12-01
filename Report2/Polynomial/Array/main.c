@@ -6,7 +6,7 @@ long getCurrentTime(void)
 {
   clock_t start;
   start = clock();
-  return ((long)((double)start * 1000000000.0 / (double)CLOCKS_PER_SEC));
+  return ((long)((double)start * 1000000.0 / (double)CLOCKS_PER_SEC));
 }
 
 int main() {
@@ -15,26 +15,26 @@ int main() {
     long start, end;
 
     for (int i = 0; i < 5; i++) {
-        a = makeRandomPoly(20, 50, 10, seed + i);
-        b = makeRandomPoly(20, 50, 10, seed + i * 10);
+        a = makeRandomPoly(10000, 50, 10000, seed + i);
+        b = makeRandomPoly(10000, 50, 10000, seed + i * 1011);
 
         start = getCurrentTime();
         c = poly_add(a, b);
         end = getCurrentTime();
 
-        printPoly(a);
-        printPoly(b);
-        printPoly(c);
-        printf("Execution time : %ld ns\n\n", end - start);
+        //printPoly(a);
+        //printPoly(b);
+        //printPoly(c);
+        printf("Execution time : %ld us\n\n", end - start);
 
         start = getCurrentTime();
         c = poly_sub(a,b);
         end = getCurrentTime();
 
-        printPoly(a);
-        printPoly(b);
-        printPoly(c);
-        printf("Execution time : %ld ns\n\n", end - start);
+        //printPoly(a);
+        //printPoly(b);
+        //printPoly(c);
+        printf("Execution time : %ld us\n\n", end - start);
     }
     erase(a);
     erase(b);

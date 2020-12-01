@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "cstdio": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "*.tcc": "cpp",
+        "type_traits": "cpp"
     }
 }

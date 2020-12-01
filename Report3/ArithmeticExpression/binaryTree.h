@@ -25,9 +25,4 @@ void preorder(BinaryNode node);
 void postorder(BinaryNode node);
 void levelorder(BinaryNode node);
 
-void printInorder(BinaryTree tree);
-void printPreorder(BinaryTree tree);
-void printPostorder(BinaryTree tree);
-void printLevelorder(BinaryTree tree);
-
 #endif

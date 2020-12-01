@@ -19,6 +19,7 @@ BinaryTree infix_to_postfix(char *infix_exp) {
             node = makeNode('(', NULL, NULL);
             push(operator, node);
         } else if (infix_exp[i] == ')') {
+            // make tree and push to stack
             while (1) {
                 center = pop(operator);
                 if (center->value == '(') {
@@ -30,6 +31,7 @@ BinaryTree infix_to_postfix(char *infix_exp) {
                 center->right = right;
                 push(operand, center);
             }
+            // push operand to stack
         } else if (infix_exp[i] >= 65 && infix_exp[i] <= 90) {
             node = makeNode(infix_exp[i], NULL, NULL);
             push(operand, node);
@@ -77,10 +79,14 @@ int main() {
 
     BinaryTree tree = infix_to_postfix(infix_exp);
 
-    printInorder(tree);
-    printPreorder(tree);
-    printPostorder(tree);
-    printLevelorder(tree);
+    printf("inorder\n");
+    inorder(tree->root);
+    printf("\npreorder\n");
+    preorder(tree->root);
+    printf("\npostorder\n");
+    postorder(tree->root);
+    printf("\nlevelorder\n");
+    levelorder(tree->root);
 
     return 0; 
 }
