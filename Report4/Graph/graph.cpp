@@ -31,7 +31,6 @@ void Graph::insertVertex(int val) {
     if (!isFull()) {
         vertices[size] = val;
         mat[size++] = NULL;
-        edgeCount++;
     } else {
         cout << "Error : Graph is full\n";
     }
@@ -39,7 +38,12 @@ void Graph::insertVertex(int val) {
 
 void Graph::insertEdge(int vtx1, int vtx2, int weight) {
     mat[vtx1] = new Node(vtx2, mat[vtx1], weight);
+    prev[edgeCount] = vtx1;
+
     mat[vtx2] = new Node(vtx1, mat[vtx2], weight);
+    prev[edgeCount] = vtx2;
+
+    edgeCount++;
 }
 
 void Graph::printGraph() {
@@ -107,22 +111,30 @@ void Graph::resetVisited() {
     }
 }
 
-void Graph::kruskal() {
+void Graph::kruskal(int vtx) {
     cout << "Kruskal Algorithm" << endl;
     cout << "Number of Node : " << size << " Number of Edge : " << edgeCount << endl;
 
-    MinHeap heap;
+    int component = label[getVertex(vtx)];
+    int count = 0;
+
+    priority_queue<Path, vector<Path>, compare> nodeQueue;
     for (int i = 0; i < size; i++) {
-        int vtx1 = getVertex(i);
         for (Node *v = mat[i]; v != NULL; v = v->getLink()) {
-            heap.insert(v->getWeight(), vtx1, v->getId());
+            if (label[v->getId()] == component || label[i] == component) {
+                nodeQueue.push(Path(v->getWeight(), i, v->getId()));
+            }
+        }
+        if (label[i] == component) {
+            count++;
         }
     }
 
     VertexSets set(size);
     int edgeAccepted = 0;
-    while (edgeAccepted < size - 1) {
-        HeapNode node = heap.remove();
+    while (edgeAccepted < count - 1) {
+        Path node = nodeQueue.top();
+        nodeQueue.pop();
         int set1 = set.findSet(node.getVtx1());
         int set2 = set.findSet(node.getVtx2());
         if (set1 != set2) {
@@ -141,9 +153,18 @@ void Graph::prim(int vtx) {
     int prev = vtx;
     int next;
     for (int i = 0; i < size; i++) selected[i] = false;
-    selected[getVertex(vtx)] = true;
+    selected[vtx] = true;
 
-    for (int i = 0; i < size - 1; i++) {
+    int component = label[getVertex(vtx)];
+    int count = 0;
+
+    for (int i = 0; i < size; i++) {
+        if (label[i] == component) {
+            count++;
+        }
+    }
+
+    for (int i = 0; i < count - 1; i++) {
         int minDist = 9999;
         for (Node *v = mat[prev]; v != NULL; v = v->getLink()) {
             if (v->getWeight() < minDist && !selected[v->getId()]) {
@@ -170,21 +191,41 @@ void Graph::findConnectedComponent() {
     int count = 0;
     int lastIdx = 0;
 
-     for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) {
         for (Node *v = mat[i]; v != NULL; v = v->getLink()) {
             if (!visited[v->getId()]) labelDFS(v->getId(), ++count);
         }
     }
     for (int i = 1; i < count + 1; i++) {
         cout << "\nComponent " << i << " : ";
-        for (int j = lastIdx; j < MAX_VTXS; j++) {
+        for (int j = 0; j < size; j++) {
             if (i == label[j]) {
                 cout << j << " ";
-                lastIdx = j + 1;
-            } else {
-                break;
             }
         }
     }
     cout << endl << "Number of Connected Component : " << count << endl;
+}
+
+void Graph::makeRandomGraph(int vtx, int edge) {
+    int randWeight, randVtx1, randVtx2;
+
+    for (int i = 0; i < vtx; i++) {
+        insertVertex(i);
+    }
+    while (edgeCount < edge) {
+        randVtx1 = rand() % vtx;
+        randVtx2 = rand() % vtx;
+        randWeight = rand() % 10 + 1;
+        if (randVtx1 != randVtx2) {
+            if (edgeCount == 0) insertEdge(randVtx1, randVtx2, randWeight);
+            
+            for (int i = 0; i < edgeCount; i++) {
+                if (prev[i] != randVtx2 && next[i] != randVtx1) {
+                    insertEdge(randVtx1, randVtx2, randWeight);
+                    break;
+                }
+            }
+        }
+    }
 }

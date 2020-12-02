@@ -1,8 +1,14 @@
 #include "node.h"
-#include "minHeap.h"
+#include "path.h"
 #include "vertexSets.h"
 #include <queue>
 #define MAX_VTXS 256
+
+struct compare {
+    bool operator()(Path a, Path b) {
+        return a.getKey() > b.getKey();
+    } 
+};
 
 class Graph {
 private:
@@ -12,6 +18,8 @@ private:
     Node* mat[MAX_VTXS];
     bool visited[MAX_VTXS];
     int label[MAX_VTXS];
+    int prev[MAX_VTXS / 2];
+    int next[MAX_VTXS / 2];
 public:
     Graph();
     ~Graph();
@@ -30,9 +38,11 @@ public:
     void BFS(int vtx);
     void resetVisited();
 
-    void kruskal();
+    void kruskal(int vtx);
     void prim(int vtx);
 
     void labelDFS(int vtx, int color);
     void findConnectedComponent();
+
+    void makeRandomGraph(int vtx, int edge);
 };

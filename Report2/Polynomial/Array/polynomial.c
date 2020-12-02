@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "polynomial.h"
 
 Poly makePoly(int degree) {
@@ -20,19 +21,29 @@ Poly makePoly(int degree) {
 }
 
 void printPoly(Poly poly) {
-    if (poly->coef[poly->degree] != 0)
-        printf("%dx^%d", poly->coef[poly->degree], poly->degree);
-    for (int i = poly->degree - 1; i > -1; i--) {
+    int isFirstTerm = true;
+
+    for (int i = poly->degree; i > -1; i--) {
         if (i == 0) {
             if (poly->coef[i] < 0)
-                printf(" %d", poly->coef[i]);
+                printf(" - %d", -poly->coef[i]);
             else if (poly->coef[i] > 0)
                 printf(" + %d", poly->coef[i]);
         } else {
-            if (poly->coef[i] < 0)
-                printf(" %dx^%d", poly->coef[i], i);
-            else if (poly->coef[i] > 0)
-                printf(" + %dx^%d", poly->coef[i], i);
+            if (isFirstTerm) {
+                if (poly->coef[i] < 0) {
+                    printf("-%dx^%d", -poly->coef[i], i);
+                    isFirstTerm = false;
+                } else if (poly->coef[i] > 0) {
+                    printf("%dx^%d", poly->coef[i], i);
+                    isFirstTerm = false;
+                }
+            } else {
+                if (poly->coef[i] < 0)
+                    printf(" - %dx^%d", -poly->coef[i], i);
+                else if (poly->coef[i] > 0)
+                    printf(" + %dx^%d", poly->coef[i], i);
+            }
         }
     }
     printf("\n");
@@ -103,10 +114,10 @@ Poly makeRandomPoly(int degree, int coef, int count, unsigned int seed) {
 
     int cnt = 0;
     int randomCoef, randomExpon;
+    srand(seed);
     while (cnt < count) {
-        srand(++seed);
         randomCoef = rand() % (coef * 2) - coef;
-        randomExpon = rand() % degree + 1;
+        randomExpon = (rand() % degree) + 1;
         if (poly->coef[randomExpon] == 0) {
             cnt++;
             append(randomCoef, randomExpon, poly);

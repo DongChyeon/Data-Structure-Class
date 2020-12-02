@@ -4,8 +4,8 @@ using namespace std;
 class Node {
 private:
     int id;
-    int weight;
     Node* link;
+    int weight;
 public:
     Node(int id, Node *link, int weight);
     ~Node();

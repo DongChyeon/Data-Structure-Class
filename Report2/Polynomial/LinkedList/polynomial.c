@@ -161,8 +161,8 @@ poly_node makeRandomPoly(int coef, int count, unsigned int seed) {
 
     int randomCoef;
     int expon = count;
+    srand(seed);
     for (int i = 0; i < count; i++) {
-        srand(++seed);
         randomCoef = rand() % (coef * 2) - coef;
         append(randomCoef, expon, node);
         expon--;

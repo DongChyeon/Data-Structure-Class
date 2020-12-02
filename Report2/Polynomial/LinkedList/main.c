@@ -12,29 +12,33 @@ long getCurrentTime(void)
 int main() {
     poly_node a, b, c;
     int seed = time(NULL);
-    long start, end;
+    //long start, end;
 
     for (int i = 0; i < 5; i++) {
-        a = makeRandomPoly(50, 10000, seed + i);
-        b = makeRandomPoly(50, 10000, seed + (i + 1) * 101);
+        a = makeRandomPoly(10, 10, seed + i);
+        b = makeRandomPoly(10, 10, seed + (i + 1) * 101);
 
-        start = getCurrentTime();
+        //start = getCurrentTime();
         c = poly_add(a, b);
-        end = getCurrentTime();
+        //end = getCurrentTime();
 
-        //printPoly(a);
-        //printPoly(b);
-        //printPoly(c);
-        printf("Elapsed time : %ld us\n\n", end - start);
+        printPoly(a);
+        printPoly(b);
+        printf("Add\n");
+        printPoly(c);
+        printf("\n");
+        //printf("Elapsed time : %ld us\n\n", end - start);
 
-        start = getCurrentTime();
+        //start = getCurrentTime();
         c = poly_sub(a,b);
-        end = getCurrentTime();
+        //end = getCurrentTime();
 
-        //printPoly(a);
-        //printPoly(b);
-        //printPoly(c);
-        printf("Elapsed time : %ld us\n\n", end - start);
+        printPoly(a);
+        printPoly(b);
+        printf("Subtract\n");
+        printPoly(c);
+        printf("\n");
+        //printf("Elapsed time : %ld us\n\n", end - start);
     }
     erase(a);
     erase(b);

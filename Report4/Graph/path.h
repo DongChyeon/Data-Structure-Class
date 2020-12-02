@@ -1,13 +1,13 @@
 #include <iostream>
 
-class HeapNode {
+class Path {
 private:
     int key;
     int vtx1;
     int vtx2;
 public:
-    HeapNode();
-    HeapNode(int key, int vtx1, int vtx2);
+    Path();
+    Path(int key, int vtx1, int vtx2);
     void setKey(int key, int vtx1, int vtx2);
     int getKey();
     int getVtx1();

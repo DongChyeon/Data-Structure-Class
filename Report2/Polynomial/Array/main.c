@@ -15,26 +15,30 @@ int main() {
     long start, end;
 
     for (int i = 0; i < 5; i++) {
-        a = makeRandomPoly(10000, 50, 10000, seed + i);
-        b = makeRandomPoly(10000, 50, 10000, seed + i * 1011);
+        a = makeRandomPoly(20, 20, 10, seed + i);
+        b = makeRandomPoly(20, 20, 10, seed + (i + 1) * 101);
 
-        start = getCurrentTime();
+        //start = getCurrentTime();
         c = poly_add(a, b);
-        end = getCurrentTime();
+        //end = getCurrentTime();
 
-        //printPoly(a);
-        //printPoly(b);
-        //printPoly(c);
-        printf("Execution time : %ld us\n\n", end - start);
+        printPoly(a);
+        printPoly(b);
+        printf("Add\n");
+        printPoly(c);
+        printf("\n");
+        //printf("Elapsed time : %ld us\n\n", end - start);
 
-        start = getCurrentTime();
+        //start = getCurrentTime();
         c = poly_sub(a,b);
-        end = getCurrentTime();
+        //end = getCurrentTime();
 
-        //printPoly(a);
-        //printPoly(b);
-        //printPoly(c);
-        printf("Execution time : %ld us\n\n", end - start);
+        printPoly(a);
+        printPoly(b);
+        printf("Subtract\n");
+        printPoly(c);
+        printf("\n");
+        //printf("Elapsed time : %ld us\n\n", end - start);
     }
     erase(a);
     erase(b);

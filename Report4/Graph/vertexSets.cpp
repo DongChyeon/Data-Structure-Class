@@ -2,7 +2,7 @@
 
 VertexSets::VertexSets(int n) {
     nSets = n;
-    for (int i = 0; i< nSets; i++) {
+    for (int i = 0; i < nSets; i++) {
         parent[i] = -1;
     }
 }
