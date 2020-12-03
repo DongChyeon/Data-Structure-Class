@@ -134,14 +134,13 @@ void Graph::kruskal(int vtx) {
     vector<Path> routes;
     
     int edgeAccepted = 0;
-
     while (edgeAccepted < count - 1) {
         Path node = nodeQueue.top();
         nodeQueue.pop();
         int set1 = set.findSet(node.getVtx1());
         int set2 = set.findSet(node.getVtx2());
         if (set1 != set2) {
-            cout << "Add Path : " << getVertex(node.getVtx1()) << " - " << getVertex(node.getVtx2()) << " cost : " << node.getKey() << endl;
+            cout << "Choose Path : " << getVertex(node.getVtx1()) << " - " << getVertex(node.getVtx2()) << " cost : " << node.getKey() << endl;
             set.unionSets(set1, set2);
             edgeAccepted++;
             routes.push_back(node);
@@ -209,7 +208,7 @@ void Graph::prim(int vtx) {
         }
 
         selected[next] = true;
-        cout << "Add Path : " << prev << " - " << next << " cost : " << minDist << endl;
+        cout << "Choose Path : " << prev << " - " << next << " cost : " << minDist << endl;
         prev = next;
     }
 }
@@ -248,13 +247,15 @@ void Graph::findConnectedComponent() {
 void Graph::makeRandomGraph(int vtx, int edge) {
     int randWeight, randVtx1, randVtx2;
 
-    for (int i = 0; i < vtx; i++) {
+    int current_size = size;
+    int current_edgeCount = edgeCount;
+    for (int i = current_size; i < current_size + vtx; i++) {
         insertVertex(i);
     }
-    while (edgeCount < edge) {
+    while (edgeCount < current_edgeCount + edge) {
         do {
-            randVtx1 = rand() % vtx;
-            randVtx2 = rand() % vtx;
+            randVtx1 = rand() % (size - current_size) + current_size;
+            randVtx2 = rand() % (size - current_size) + current_size;
         } while (randVtx1 == randVtx2);
         randWeight = rand() % 30 + 1;
 
