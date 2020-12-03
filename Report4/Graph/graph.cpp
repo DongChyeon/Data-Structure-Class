@@ -1,4 +1,5 @@
 #include "graph.h"
+#include <vector>
 
 Graph::Graph() {
     size = 0;
@@ -39,10 +40,8 @@ void Graph::insertVertex(int val) {
 
 void Graph::insertEdge(int vtx1, int vtx2, int weight) {
     mat[vtx1] = new Node(vtx2, mat[vtx1], weight);
-    prev[edgeCount] = vtx1;
-
     mat[vtx2] = new Node(vtx1, mat[vtx2], weight);
-    next[edgeCount] = vtx2;
+    path[edgeCount] = Path(weight, vtx1, vtx2);
 
     edgeCount++;
 }
@@ -132,7 +131,10 @@ void Graph::kruskal(int vtx) {
     }
 
     VertexSets set(size);
+    vector<Path> routes;
+    
     int edgeAccepted = 0;
+
     while (edgeAccepted < count - 1) {
         Path node = nodeQueue.top();
         nodeQueue.pop();
@@ -142,8 +144,34 @@ void Graph::kruskal(int vtx) {
             cout << "Add Path : " << getVertex(node.getVtx1()) << " - " << getVertex(node.getVtx2()) << " cost : " << node.getKey() << endl;
             set.unionSets(set1, set2);
             edgeAccepted++;
+            routes.push_back(node);
         }
     }
+
+    // Print minumum path
+    vector<Path>::iterator iter = routes.begin();
+    int next = iter->getVtx2();
+    cout << iter->getVtx1() << " ";
+    routes.erase(iter);
+    while (routes.size() > 0) {
+        for (iter = routes.begin(); iter != routes.end(); iter++) {
+            if (iter->getVtx1() == next) {
+                cout << iter->getVtx1() << " ";
+                if (routes.size() == 1) cout << iter->getVtx2();
+                next = iter->getVtx2();
+                routes.erase(iter);
+                break;
+            }
+            if (iter->getVtx2() == next) {
+                cout << iter->getVtx2() << " "; 
+                if (routes.size() == 1) cout << iter->getVtx1();
+                next = iter->getVtx1();
+                routes.erase(iter);
+                break;
+            }
+        }
+    }
+    cout << endl;
 }
 
 void Graph::prim(int vtx) {
@@ -174,6 +202,12 @@ void Graph::prim(int vtx) {
                 next = v->getId();
             }
         }
+
+        if (minDist == 9999) {
+            cout << "Error : Cannot find path" << endl;
+            return;
+        }
+
         selected[next] = true;
         cout << "Add Path : " << prev << " - " << next << " cost : " << minDist << endl;
         prev = next;
@@ -194,6 +228,7 @@ void Graph::findConnectedComponent() {
     int count = 0;
     int lastIdx = 0;
 
+    for (int i = 0; i < size; i++) label[i] = 0;
     for (int i = 0; i < size; i++) {
         for (Node *v = mat[i]; v != NULL; v = v->getLink()) {
             if (!visited[v->getId()]) labelDFS(v->getId(), ++count);
@@ -221,7 +256,7 @@ void Graph::makeRandomGraph(int vtx, int edge) {
             randVtx1 = rand() % vtx;
             randVtx2 = rand() % vtx;
         } while (randVtx1 == randVtx2);
-        randWeight = rand() % 10 + 1;
+        randWeight = rand() % 30 + 1;
 
         if (edgeCount == 0) {
             insertEdge(randVtx1, randVtx2, randWeight);
@@ -232,19 +267,13 @@ void Graph::makeRandomGraph(int vtx, int edge) {
     }
 }
 
-void Graph::printEdge() {
-    for (int i = 0; i < edgeCount; i++) {
-        cout << prev[i] << " " << next[i] << endl;
-    }
-}
-
 bool Graph::dupNodeCheck(int vtx1, int vtx2) {
     for (int i = 0; i < edgeCount; i++) {
-        if (vtx1 == prev[i] && vtx2 == next[i])
+        if (vtx1 == path[i].getVtx1() && vtx2 == path[i].getVtx2())
             return true;
     }
     for (int i = 0; i < edgeCount; i++) {
-        if (vtx1 == next[i] && vtx2 == prev[i])
+        if (vtx1 == path[i].getVtx2() && vtx2 == path[i].getVtx1())
             return true;
     }
 
