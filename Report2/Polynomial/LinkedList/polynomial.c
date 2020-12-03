@@ -16,6 +16,11 @@ poly_node makePoly() {
 }
 
 void printPoly(poly_node node) {
+    if (node->link == NULL) {
+        printf("0\n");
+        return;
+    }
+    
     poly_node temp = node->link;
     if (temp->expon == 0) 
         printf("%d", temp->coef);

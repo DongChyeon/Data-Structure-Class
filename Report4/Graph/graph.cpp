@@ -25,6 +25,7 @@ int Graph::getEdge(int vtx1, int vtx2) {
     for (Node *v = mat[vtx1]; v != NULL; v = v->getLink()) {
         if (v->getId() == vtx2) return v->getWeight();
     }
+    return -1;
 }
 
 void Graph::insertVertex(int val) {
@@ -41,7 +42,7 @@ void Graph::insertEdge(int vtx1, int vtx2, int weight) {
     prev[edgeCount] = vtx1;
 
     mat[vtx2] = new Node(vtx1, mat[vtx2], weight);
-    prev[edgeCount] = vtx2;
+    next[edgeCount] = vtx2;
 
     edgeCount++;
 }
@@ -166,12 +167,14 @@ void Graph::prim(int vtx) {
 
     for (int i = 0; i < count - 1; i++) {
         int minDist = 9999;
+
         for (Node *v = mat[prev]; v != NULL; v = v->getLink()) {
             if (v->getWeight() < minDist && !selected[v->getId()]) {
                 minDist = v->getWeight();
                 next = v->getId();
             }
         }
+        selected[next] = true;
         cout << "Add Path : " << prev << " - " << next << " cost : " << minDist << endl;
         prev = next;
     }
@@ -214,18 +217,36 @@ void Graph::makeRandomGraph(int vtx, int edge) {
         insertVertex(i);
     }
     while (edgeCount < edge) {
-        randVtx1 = rand() % vtx;
-        randVtx2 = rand() % vtx;
+        do {
+            randVtx1 = rand() % vtx;
+            randVtx2 = rand() % vtx;
+        } while (randVtx1 == randVtx2);
         randWeight = rand() % 10 + 1;
-        if (randVtx1 != randVtx2) {
-            if (edgeCount == 0) insertEdge(randVtx1, randVtx2, randWeight);
-            
-            for (int i = 0; i < edgeCount; i++) {
-                if (prev[i] != randVtx2 && next[i] != randVtx1) {
-                    insertEdge(randVtx1, randVtx2, randWeight);
-                    break;
-                }
-            }
+
+        if (edgeCount == 0) {
+            insertEdge(randVtx1, randVtx2, randWeight);
+        } else {
+            if (!dupNodeCheck(randVtx1, randVtx2))
+                insertEdge(randVtx1, randVtx2, randWeight);
         }
     }
+}
+
+void Graph::printEdge() {
+    for (int i = 0; i < edgeCount; i++) {
+        cout << prev[i] << " " << next[i] << endl;
+    }
+}
+
+bool Graph::dupNodeCheck(int vtx1, int vtx2) {
+    for (int i = 0; i < edgeCount; i++) {
+        if (vtx1 == prev[i] && vtx2 == next[i])
+            return true;
+    }
+    for (int i = 0; i < edgeCount; i++) {
+        if (vtx1 == next[i] && vtx2 == prev[i])
+            return true;
+    }
+
+    return false;
 }

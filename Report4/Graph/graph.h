@@ -18,6 +18,7 @@ private:
     Node* mat[MAX_VTXS];
     bool visited[MAX_VTXS];
     int label[MAX_VTXS];
+
     int prev[MAX_VTXS / 2];
     int next[MAX_VTXS / 2];
 public:
@@ -45,4 +46,7 @@ public:
     void findConnectedComponent();
 
     void makeRandomGraph(int vtx, int edge);
+    void printEdge();
+
+    bool dupNodeCheck(int vtx1, int vtx2);
 };
