@@ -4,23 +4,24 @@
 #include <queue>
 #include <vector>
 #define MAX_VTXS 256
+#define MAX_EDGES 1024
 
 struct compare {
     bool operator()(Path a, Path b) {
-        return a.getKey() > b.getKey();
+        return a.getWeight() > b.getWeight();
     } 
 };
 
 class Graph {
 private:
     int size;
-    int edgeCount;
+    int edgeSize;
     int vertices[MAX_VTXS];
     Node* mat[MAX_VTXS];
     bool visited[MAX_VTXS];
     int label[MAX_VTXS];
-
-    Path path[MAX_VTXS / 2];
+    int vtxCount; // The number of vertexes of the connected component to be searched for
+    Path path[MAX_EDGES];
 public:
     Graph();
     ~Graph();
@@ -46,5 +47,5 @@ public:
     void findConnectedComponent();
 
     void makeRandomGraph(int vtx, int edge);
-    bool dupNodeCheck(int vtx1, int vtx2);
+    bool isDupNode(int vtx1, int vtx2);
 };

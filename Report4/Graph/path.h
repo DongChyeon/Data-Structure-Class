@@ -2,14 +2,14 @@
 
 class Path {
 private:
-    int key;
+    int weight;
     int vtx1;
     int vtx2;
 public:
     Path();
-    Path(int key, int vtx1, int vtx2);
-    void setKey(int key, int vtx1, int vtx2);
-    int getKey();
+    Path(int weight, int vtx1, int vtx2);
+    void setPath(int weight, int vtx1, int vtx2);
+    int getWeight();
     int getVtx1();
     int getVtx2();
 };

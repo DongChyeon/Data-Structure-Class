@@ -8,6 +8,6 @@ private:
 public:
     VertexSets(int n);
     bool isRoot(int id);
-    int findSet(int vertice);
+    int findSet(int vtx);
     void unionSets(int set1, int set2);
 };

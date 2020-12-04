@@ -3,7 +3,7 @@
 int main() {
     Graph graph;
 
-    //Connected graph only can use prim, kruskal algorithm
+    // Connected graph only can use prim, kruskal algorithm
     for (int i = 0; i < 7; i++) {
         graph.insertVertex(i);
     }
@@ -17,16 +17,14 @@ int main() {
     graph.insertEdge(6, 1, 14);
     graph.insertEdge(3, 6, 18);
 
+    // Make random graph(Does not affect existing graphs)
     graph.makeRandomGraph(50, 30);
 
     graph.printGraph();
     cout << endl;
-    graph.resetVisited();
-    graph.DFS(1);
+    graph.DFS(7);
     cout << endl;
-    graph.resetVisited();
-    graph.BFS(1);
-    graph.resetVisited();
+    graph.BFS(7);
     graph.findConnectedComponent();
     cout << endl;
     graph.kruskal(0);
