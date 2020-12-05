@@ -9,13 +9,15 @@ int main() {
         tree.insert(new BinaryNode(arr[i], NULL, NULL));
     }
 
-    cout << "inorder\n";
-    tree.inorder(tree.getRoot());
-    cout << endl << "preorder\n";
+    cout << "inorder(ASEC)\n";
+    tree.inorder(tree.getRoot(), true);
+    cout << "\ninorder(DESC)\n";
+    tree.inorder(tree.getRoot(), false);
+    cout << "\npreorder\n";
     tree.preorder(tree.getRoot());
-    cout << endl << "postorder\n";
+    cout << "\npostorder\n";
     tree.postorder(tree.getRoot());
-    cout << endl << "levelorder\n";
+    cout << "\nlevelorder\n";
     tree.levelorder(tree.getRoot());
     cout << endl;
 

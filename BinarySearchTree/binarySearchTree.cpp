@@ -5,11 +5,20 @@ void BinarySearchTree::setRoot(BinaryNode* node) { root = node; }
 BinaryNode* BinarySearchTree::getRoot() { return root; }
 bool BinarySearchTree::isEmpty() { return root == NULL; }
 
-void BinarySearchTree::inorder(BinaryNode* node) {
-    if (node != NULL) {
-        inorder(node->getLeft());
-        printf("[%d] ", node->getData());
-        inorder(node->getRight());
+void BinarySearchTree::inorder(BinaryNode* node, bool isAsec) 
+{   
+    if (isAsec) {
+        if (node != NULL) {
+            inorder(node->getLeft(), true);
+            printf("[%d] ", node->getData());
+            inorder(node->getRight(), true);
+        }
+    } else {
+        if (node != NULL) {
+            inorder(node->getRight(), false);
+            printf("[%d] ", node->getData());
+            inorder(node->getLeft(), false);
+        }
     }
 }
 
@@ -42,6 +51,7 @@ void BinarySearchTree::levelorder(BinaryNode* node) {
         }
     }
 }
+
 
 BinaryNode* BinarySearchTree::search(BinaryNode* node, int key) {
     while (node != NULL) {

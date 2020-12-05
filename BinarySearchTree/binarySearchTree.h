@@ -10,7 +10,7 @@ public:
     BinaryNode* getRoot();
     bool isEmpty();
 
-    void inorder(BinaryNode* node);
+    void inorder(BinaryNode* node, bool isAsec);
     void preorder(BinaryNode* node);
     void postorder(BinaryNode* node);
     void levelorder(BinaryNode* node);
