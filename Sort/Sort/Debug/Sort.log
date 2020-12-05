@@ -1,3 +1,0 @@
-﻿  sort.c
-C:\Users\kimdo\OneDrive\문서\Lecture\Data-Structure\Sort\Sort\sort.c(83,17): warning C4013: 'rand'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-  Sort.vcxproj -> C:\Users\kimdo\OneDrive\문서\Lecture\Data-Structure\Sort\Debug\Sort.exe

@@ -48,4 +48,5 @@ public:
 
     void makeRandomGraph(int vtx, int edge);
     bool isDupNode(int vtx1, int vtx2);
+    bool startCheck(int next, vector<Path> routes);
 };

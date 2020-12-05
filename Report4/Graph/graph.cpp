@@ -124,19 +124,18 @@ void Graph::kruskal(int vtx) {
 
     int component = label[getVertex(vtx)];
     vtxCount = 0;
-    int edgeSize = 0;
+
+    for (int i = 0; i < size; i++) {
+        if (label[i] == component) vtxCount++;
+    }
 
     priority_queue<Path, vector<Path>, compare> nodeQueue;
-    for (int i = 0; i < size; i++) {
-        for (Node *v = mat[i]; v != NULL; v = v->getLink()) {
-            if (label[v->getId()] == component || label[i] == component) {
-                nodeQueue.push(Path(v->getWeight(), i, v->getId()));
-            }
+    for (int i = 0; i < edgeSize; i++) {
+        Path node = path[i];
+        if (label[node.getVtx1()] == component && label[node.getVtx2()] == component) {
+            nodeQueue.push(node);
         }
-        if (label[i] == component) {
-            vtxCount++;
-        }
-    }
+    }   
 
     VertexSets set(size);
     vector<Path> routes;
@@ -158,9 +157,16 @@ void Graph::kruskal(int vtx) {
 
     // Print shortest path
     vector<Path>::iterator iter = routes.begin();
+
     int next = iter->getVtx2();
-    cout << "Node" << iter->getVtx1() << " ";
+    if (startCheck(next, routes)) {
+        cout << "Node" << iter->getVtx1() << " ";
+    } else {
+        next = iter->getVtx1();
+        cout << "Node" << iter->getVtx2() << " ";
+    }
     routes.erase(iter);
+
     while (routes.size() > 0) {
         for (iter = routes.begin(); iter != routes.end(); iter++) {
             if (iter->getVtx1() == next) {
@@ -294,6 +300,17 @@ bool Graph::isDupNode(int vtx1, int vtx2) {
     for (int i = 0; i < edgeSize; i++) {
         if (vtx1 == path[i].getVtx2() && vtx2 == path[i].getVtx1())
             return true;
+    }
+
+    return false;
+}
+
+bool Graph::startCheck(int next, vector<Path> routes) {
+    for (vector<Path>::iterator iter = routes.begin(); iter != routes.end(); iter++) {
+        if (iter->getVtx1() == next) {
+            //cout << "Node" << iter->getVtx2();
+            return true;
+        }
     }
 
     return false;
