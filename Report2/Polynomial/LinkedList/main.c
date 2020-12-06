@@ -40,6 +40,7 @@ int main() {
         printf("\n");
         //printf("Elapsed time : %ld us\n\n", end - start);
     }
+
     erase(a);
     erase(b);
     erase(c);

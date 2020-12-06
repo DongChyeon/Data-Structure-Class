@@ -116,7 +116,9 @@ Poly makeRandomPoly(int degree, int coef, int count, unsigned int seed) {
     int randomCoef, randomExpon;
     srand(seed);
     while (cnt < count) {
-        randomCoef = rand() % (coef * 2) - coef;
+        do {
+            randomCoef = rand() % (coef * 2) - coef;
+        } while (randomCoef == 0);
         randomExpon = (rand() % degree) + 1;
         if (poly->coef[randomExpon] == 0) {
             cnt++;

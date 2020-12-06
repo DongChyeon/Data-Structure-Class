@@ -7,7 +7,7 @@ poly_node makePoly() {
 
     node = (poly_node)malloc(sizeof(struct term_node));
     if (node == NULL) {
-        fprintf(stderr, "The memory is full\n");
+        printf("The memory is full\n");
         exit(1);
     }
     node->link = NULL;
@@ -70,13 +70,12 @@ void erase(poly_node ptr) {
     }
 }
 
-/* incompleted
 poly_node poly_multiply(poly_node a, poly_node b) {
     poly_node front, poly1, poly2;
     int sum;
     front = (poly_node)malloc(sizeof(struct term_node));
     if (front == NULL) {
-        fprintf(stderr, "The memory is full\n");
+        printf("The memory is full\n");
         exit(1);
     }
     front->link = NULL;
@@ -86,7 +85,7 @@ poly_node poly_multiply(poly_node a, poly_node b) {
 
     while (poly1) {
         while (poly2) {
-            append(poly1->coef*poly1->coef, poly2->expon+poly2->expon, front);
+            append(poly1->coef*poly2->coef, poly1->expon+poly2->expon, front);
             poly2 = poly2->link;
         }
         poly2 = b->link;
@@ -95,7 +94,6 @@ poly_node poly_multiply(poly_node a, poly_node b) {
 
     return front;
 }
-*/
 
 poly_node poly_add(poly_node a, poly_node b) {
     poly_node front = makePoly();
@@ -168,7 +166,9 @@ poly_node makeRandomPoly(int coef, int count, unsigned int seed) {
     int expon = count;
     srand(seed);
     for (int i = 0; i < count; i++) {
-        randomCoef = rand() % (coef * 2) - coef;
+        do {
+            randomCoef = rand() % (coef * 2) - coef;
+        } while (randomCoef == 0);
         append(randomCoef, expon, node);
         expon--;
     }
