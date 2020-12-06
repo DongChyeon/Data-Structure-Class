@@ -30,6 +30,14 @@ int main() {
 	cout << "Before sorting" << endl;
 	makeRandomArray(arr, 10, 20);
 	printArray(arr, 10);
+	cout << "Heap sort" << endl;
+	heapSort(arr, 10);
+	printArray(arr, 10);
+	cout << endl;
+
+	cout << "Before sorting" << endl;
+	makeRandomArray(arr, 10, 20);
+	printArray(arr, 10);
 	cout << "Merge sort" << endl;
 	mergeSort(arr, 0, 9);
 	printArray(arr, 10);

@@ -1,4 +1,5 @@
 #include "sort.h"
+#include "minHeap.h"
 
 void printArray(int* arr, int n) {
 	for (int i = 0; i < n; i++) {
@@ -50,6 +51,15 @@ void bubbleSort(int* arr, int n) {
 		}
 	}
 }
+
+void heapSort(int *arr, int n) {
+	MinHeap heap;
+
+	for (int i = 0; i < n; i++)
+		heap.insert(arr[i]);
+	for (int i = 0; i < n; i++)
+		arr[i] = heap.remove();
+} 
 
 void mergeSort(int *arr, int left, int right) {
 	if (left < right) {
