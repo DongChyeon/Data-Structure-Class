@@ -38,6 +38,7 @@ public:
     void DFS(int vtx);
     void adjSearch(int vtx);
     void BFS(int vtx);
+    void spanningTreeByBFS(int vtx);
     void resetVisited();
 
     void kruskal(int vtx);

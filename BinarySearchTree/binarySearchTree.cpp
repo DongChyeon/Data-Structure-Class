@@ -52,7 +52,6 @@ void BinarySearchTree::levelorder(BinaryNode* node) {
     }
 }
 
-
 BinaryNode* BinarySearchTree::search(BinaryNode* node, int key) {
     while (node != NULL) {
         if (key == node->getData())
@@ -85,5 +84,72 @@ void BinarySearchTree::insertRecur(BinaryNode* root, BinaryNode* node) {
             root->setRight(node);
         else
             insertRecur(root->getRight(), node);
+    }
+}
+
+void BinarySearchTree::remove(BinaryNode* parent, BinaryNode* node) {
+    if (node->isLeaf()) {
+        if (parent == NULL) root = NULL;
+        else {
+            if (parent->getLeft() == node) parent->setLeft(NULL);
+            else parent->setRight(NULL);
+        }
+    }
+
+    else if (node->getLeft() == NULL || node->getRight() == NULL) {
+        BinaryNode* child;
+
+        if (node->getLeft() != NULL) {
+            child = node->getLeft();
+        } else {
+            child = node->getRight();
+        }
+
+        if (node == root) root = child;
+        else {
+            if (parent->getLeft() == node) {
+                parent->setLeft(child);
+            } else {
+                parent->setRight(child);
+            }
+        }
+    }
+
+    else {
+        BinaryNode* parent = node;
+        BinaryNode* child = node->getRight();
+        while (child->getLeft() != NULL) {
+            parent = child;
+            child = child->getLeft();
+        }
+
+        if (parent->getLeft() == child) 
+            parent->setLeft(child->getRight());
+        else
+            parent->setRight(child->getRight());
+        
+        node->setData(child->getData());
+        node = child;
+    }
+
+    delete node; 
+}
+
+void BinarySearchTree::remove(int key) {
+    if (isEmpty()) return;
+
+    BinaryNode *parent = NULL;
+    BinaryNode *node = root;
+    while (node != NULL && node->getData() != key) {
+        parent = node;
+        if (key < node->getData()) node = node->getLeft();
+        else node = node->getRight();
+    }
+
+    if (node == NULL) {
+        cout << "Error : key is not in the tree!" << endl;
+        return;
+    } else {
+        remove(parent, node);
     }
 }

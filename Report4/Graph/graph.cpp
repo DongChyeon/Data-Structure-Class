@@ -113,6 +113,36 @@ void Graph::BFS(int vtx) {
     cout << "Number of Nodes : " << vtxCount << " Number of Edges : " << vtxCount - 1 << endl;
 }
 
+void Graph::spanningTreeByBFS(int vtx) {
+    resetVisited();
+    int prev = getVertex(vtx), next;
+    vtxCount = 1;
+    visited[vtx] = true;
+    cout << "BFS" << endl;  
+
+    queue<int> queue;
+    queue.push(vtx);
+
+    while (!queue.empty()) {
+        int vertice = queue.front();
+        queue.pop();
+        for (Node *v = mat[vertice]; v != NULL; v = v->getLink()) {
+            int id = v->getId();
+            if (!visited[id]) {
+                visited[id] = true;
+                next = id;
+                cout << "Choose Path : " << getVertex(prev) << " - " << 
+                    v->getId() << " cost : " << v->getWeight() << endl;
+                queue.push(id);
+                vtxCount++;
+                prev = next;
+            }
+        }
+    }
+    cout << endl;
+    cout << "Number of Nodes : " << vtxCount << " Number of Edges : " << vtxCount - 1 << endl;
+}
+
 void Graph::resetVisited() {
     for (int i = 0; i < size; i++) {
         visited[i] = false;

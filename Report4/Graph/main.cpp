@@ -25,6 +25,8 @@ int main() {
     graph.DFS(7);
     cout << endl;
     graph.BFS(7);
+    cout << endl;
+    graph.spanningTreeByBFS(7);
     graph.findConnectedComponent();
     cout << endl;
     graph.kruskal(0);

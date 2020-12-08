@@ -19,6 +19,9 @@ int main() {
     tree.postorder(tree.getRoot());
     cout << "\nlevelorder\n";
     tree.levelorder(tree.getRoot());
+    tree.remove(60);
+    cout << "\nlevelorder\n";
+    tree.levelorder(tree.getRoot());
     cout << endl;
 
     return 0;

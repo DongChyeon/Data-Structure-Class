@@ -18,4 +18,6 @@ public:
     BinaryNode* search(BinaryNode* node, int key);
     void insert(BinaryNode* node);
     void insertRecur(BinaryNode* root, BinaryNode* node);
+    void remove(BinaryNode* root, BinaryNode* node);
+    void remove(int key);
 };

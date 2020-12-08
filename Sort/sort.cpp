@@ -71,11 +71,16 @@ void mergeSort(int *arr, int left, int right) {
 }
 
 static void merge(int* arr, int left, int mid, int right) {
-	int i, j, k = left, l;
-	static int sorted[1024];
+	int i, j, l;
+	int k = left;
+	static int sorted[MAX_SIZE];
 
 	for (i = left, j = mid + 1; i <= mid && j <= right; ) {
-		sorted[k++] = (arr[i] <= arr[j]) ? arr[i++] : arr[j++];
+		if (arr[i] <= arr[j]) {
+			sorted[k++] = arr[i++];
+		} else {
+			sorted[k++] = arr[j++];
+		}
 	}
 	if (i > mid) {
 		for (l = j; l <= right; l++, k++) {
@@ -95,8 +100,8 @@ static void merge(int* arr, int left, int mid, int right) {
 void quickSort(int* arr, int left, int right) {
 	if (left < right) {
 		int q = partition(arr, left, right);
-		quickSort(arr, left, q-1);
-		quickSort(arr, q+1, right);
+		quickSort(arr, left, q - 1);
+		quickSort(arr, q + 1, right);
 	}
 }
 
