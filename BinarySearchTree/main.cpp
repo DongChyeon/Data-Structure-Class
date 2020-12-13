@@ -3,7 +3,7 @@
 int main() {
     BinarySearchTree tree;
     
-    int arr[10] = { 50, 17, 66, 19, 5, 60, 92, 80, 1, 13 };
+    int arr[13] = { 30, 10, 25, 15, 80, 35, 1, 45, 89, 90, 11, 6, 66 };
 
     for (int i = 0; i < sizeof(arr) / sizeof(int); i++) {
         tree.insert(new BinaryNode(arr[i], NULL, NULL));

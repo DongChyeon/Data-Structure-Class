@@ -1,22 +1,64 @@
-#include <stdbool.h>
+#include <iostream>
+using namespace std;
+#define MAX_SIZE 256;
 
-#ifndef _QUEUE_
-#define _QUEUE
-
-typedef struct {
-    int *element;
+template <class T> class Queue {
+private:
+    int front;
+    int rear;
     int size;
-    int front,rear;
-    bool last_oper;
-} queue;
-typedef queue* Queue;
+    T *data;
+public:
+    Queue(int size) {
+        front = 0;
+        rear = 0;
+        this->size = size + 1;
+        data = new T[size];
+    }
 
-Queue create(int n);
-bool isFull(Queue queue);
-void enqueue(Queue queue, int elem);
-int dequeue(Queue queue);
-bool isEmpty(Queue queue);
-int pop(Queue queue);
-void printQueue(Queue queue);
+    ~Queue() {
+        delete[] data;
+    }
 
-#endif
+    bool isEmpty() {
+        return front == rear;
+    }
+
+    bool isFull() {
+        return (rear + 1) % size == front;
+    }
+
+    void enqueue(T elem) {
+        if (isFull()) {
+            cout << "Error : Queue is Full!" << endl;
+        } else {
+            rear = (rear + 1) % size;
+            data[rear] = elem;
+        }
+    }
+
+    T dequeue() {
+        if (isEmpty()) {
+            cout << "Error : Queue is Empty!" << endl;
+        } else {
+            front = (front + 1) % size;
+            return data[front];
+        }
+    }
+
+    T peek() {
+        if (isEmpty()) {
+            cout << "Error : Queue is Empty!" << endl;
+        } else {
+            return data[(front + 1) % size];
+        }
+    }
+    
+    void display() {
+        int maxi = (front < rear) ? rear : rear + size;
+        for (int i = front + 1; i <= maxi; i++) {
+            cout << data[i % size] << " ";
+        }
+        cout << endl;
+    }
+};

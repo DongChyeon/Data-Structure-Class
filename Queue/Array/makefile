@@ -1,11 +1,8 @@
-queueEx: main.o queue.o
-	gcc -o queueEx main.o queue.o
+queue: main.o
+	g++ -o queue main.o
 
-queue.o: queue.c queue.h
-	gcc -c queue.c -o queue.o 
-
-main.o: main.c
-	gcc -c main.c -o main.o
+main.o: main.cpp queue.h
+	g++ -c main.cpp -o main.o
 
 clean:
-	rm -f queueEx *.o
+	rm -f queue *.o

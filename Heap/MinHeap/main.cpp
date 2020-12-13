@@ -3,15 +3,10 @@
 int main() {
     MinHeap heap;
 
-	heap.insert(1);
-	heap.insert(6);
-	heap.insert(5);
-	heap.insert(3);
-	heap.insert(7);
-	heap.insert(2);
-	heap.printHeap();
-
-	heap.remove();
+	int arr[13] = { 30, 10, 25, 15, 80, 35, 1, 45, 89, 90, 11, 6, 66 };
+	for (int i = 0; i < 13; i++) {
+		heap.insert(arr[i]);
+	}
 	heap.printHeap();
 
     return 0;

@@ -111,7 +111,8 @@ void Graph::kruskal() {
         int set1 = set.findSet(node.getVtx1());
         int set2 = set.findSet(node.getVtx2());
         if (set1 != set2) {
-            cout << "Add Edge : " << getVertex(node.getVtx1()) << " - " << getVertex(node.getVtx2()) << " cost : " << node.getKey() << endl;
+            cout << "Choose Path : " << getVertex(node.getVtx1()) << " - " << 
+                    getVertex(node.getVtx2()) << " cost : " << node.getWeight() << endl;
             set.unionSets(set1, set2);
             edgeAccepted++;
         }
