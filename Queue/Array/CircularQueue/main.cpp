@@ -8,8 +8,7 @@ int main() {
     queue.enqueue(3);
     queue.enqueue(4);
     queue.enqueue(5);
-    cout << queue.dequeue() << endl;
-    queue.enqueue(5);
+    queue.display();
     cout << queue.dequeue() << endl;
     queue.enqueue(6);
 

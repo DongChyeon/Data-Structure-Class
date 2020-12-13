@@ -7,17 +7,17 @@ private:
     int front;
     int rear;
     int size;
-    T *data;
+    T *elements;
 public:
     Queue(int size) {
         front = 0;
         rear = 0;
-        this->size = size + 1;
-        data = new T[size];
+        this->size = size;
+        elements = new T[size];
     }
 
     ~Queue() {
-        delete[] data;
+        delete[] elements;
     }
 
     bool isEmpty() {
@@ -25,15 +25,14 @@ public:
     }
 
     bool isFull() {
-        return (rear + 1) % size == front;
+        return rear == size;
     }
 
     void enqueue(T elem) {
         if (isFull()) {
             cout << "Error : Queue is Full!" << endl;
         } else {
-            rear = (rear + 1) % size;
-            data[rear] = elem;
+            elements[rear++] = elem;
         }
     }
 
@@ -41,8 +40,7 @@ public:
         if (isEmpty()) {
             cout << "Error : Queue is Empty!" << endl;
         } else {
-            front = (front + 1) % size;
-            return data[front];
+            return elements[front++];
         }
     }
 
@@ -50,14 +48,13 @@ public:
         if (isEmpty()) {
             cout << "Error : Queue is Empty!" << endl;
         } else {
-            return data[(front + 1) % size];
+            return elements[front + 1];
         }
     }
     
     void display() {
-        int maxi = (front < rear) ? rear : rear + size;
-        for (int i = front + 1; i <= maxi; i++) {
-            cout << data[i % size] << " ";
+        for (int i = front; i < rear; i++) {
+            cout << elements[i] << " ";
         }
         cout << endl;
     }
