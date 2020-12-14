@@ -1,5 +1,5 @@
 # Data-Structure-Class
-자료구조 수업 내용 및 과제 저장소<br>
+자료구조 관련 소스 코드 저장소<br>
 사용 언어 : C/C++
 
 ## ArithmeticExpression (C)
@@ -79,6 +79,8 @@ BFS, DFS, prim, kruskal 알고리즘 구현<br>
 
 ### 2. LinkedList
 연결 리스트를 이용한 다항식 계산의 구현 (덧셈, 뺄셈, 곱셈 구현)
+
+</ul>
 
 ## Queue (C++)
 
