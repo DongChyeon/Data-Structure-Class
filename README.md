@@ -1,12 +1,56 @@
 # Data-Structure-Class
-자료구조 수업 내용 및 과제 저장소
+자료구조 수업 내용 및 과제 저장소<br>
+사용 언어 : C/C++
 
-## BinaryTree
+## ArithmeticExpression (C)
+
+산술 이진 트리의 구현<br>
+입력 받은 inorder expression을 이진트리로 만들어 inorder, preorder, postorder, levelorder 순회를 구현
+
+## BinarySearchTree (C++)
+
+이진 탐색 트리의 구현
+
+## BinaryTree (C)
 
 이진트리의 구현
 <br>inorder, preorder, postorder, levelorder와 같은 순회방법 구현
 
-## LinkedList
+## Graph (C++)
+
+그래프의 구현<br>
+BFS, DFS, prim, kruskal 알고리즘 구현<br>
+
+<ul>
+  
+### 1. AdjacencyList
+인접 리스트를 이용한 그래프의 구현
+  
+### 2. AdjacencyMatrix
+2차원 배열을 이용한 그래프의 구현
+
+</ul>
+
+## Heap (C++)
+
+힙의 구현
+
+<ul>
+  
+### 1. MaxHeap
+최대 힙의 구현
+
+### 2. MinHeap
+최소 힙의 구현
+
+</ul>
+
+## HuffmanTree (C)
+
+허프만 트리의 구현<br>
+글을 입력받고 허프만 트리를 만들어 인코딩과 디코딩 수행
+
+## LinkedList (C)
 
 <ul>
   
@@ -20,15 +64,23 @@
 
 </ul>
 
-## MultiplyTwoArrays
+## MultiplyTwoArrays (C)
 
 행렬의 곱셈 구현
 
-## Polynomial
+## Polynomial (C)
 
-연결리스트를 통한 다항식 계산의 구현, 아직 덧셈까지밖에 구현하지 않았다.
+연결리스트를 활요한 다항식 계산의 구현
 
-## Queue
+<ul>
+  
+### 1. Array
+배열을 이용한 다항식 계산의 구현 (덧셈, 뺄셈 구현)
+
+### 2. LinkedList
+연결 리스트를 이용한 다항식 계산의 구현 (덧셈, 뺄셈, 곱셈 구현)
+
+## Queue (C++)
 
 <ul>
   
@@ -40,15 +92,15 @@
 
 </ul>
 
-## Sort
+## Sort (C++)
 
 삽입 정렬, 선택 정렬, 버블 정렬의 구현
 
-## SparseMatrix
+## SparseMatrix (C)
 
 구조체를 통한 희소행렬의 구현과 희소행렬을 이용한 행렬의 곱셈 구현
 
-## Stack
+## Stack (C)
 
 <ul>
   
@@ -60,10 +112,10 @@
 
 </ul>
 
-## StackCaculator
+## StackCaculator (C)
 
 스택 계산기의 구현 (아직 미완성)
 
-## StringMatching
+## StringMatching (C)
 
 문자열에서 원하는 문자열의 위치 찾기
