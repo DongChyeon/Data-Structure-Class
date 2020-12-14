@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "algorithm": "cpp",
-        "iterator": "cpp",
-        "xutility": "cpp",
-        "iostream": "cpp"
-    }
-}
