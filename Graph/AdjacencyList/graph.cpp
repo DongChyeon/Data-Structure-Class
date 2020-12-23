@@ -184,39 +184,6 @@ void Graph::kruskal(int vtx) {
             routes.push_back(node);
         }
     }
-
-    // Print shortest path
-    vector<Path>::iterator iter = routes.begin();
-
-    int next = iter->getVtx2();
-    if (startCheck(next, routes)) {
-        cout << "Node" << iter->getVtx1() << " ";
-    } else {
-        next = iter->getVtx1();
-        cout << "Node" << iter->getVtx2() << " ";
-    }
-    routes.erase(iter);
-
-    while (routes.size() > 0) {
-        for (iter = routes.begin(); iter != routes.end(); iter++) {
-            if (iter->getVtx1() == next) {
-                cout << "Node" << iter->getVtx1() << " ";
-                if (routes.size() == 1) cout << "Node" << iter->getVtx2();
-                next = iter->getVtx2();
-                routes.erase(iter);
-                break;
-            }
-            if (iter->getVtx2() == next) {
-                cout << "Node" << iter->getVtx2() << " "; 
-                if (routes.size() == 1) cout << "Node" << iter->getVtx1();
-                next = iter->getVtx1();
-                routes.erase(iter);
-                break;
-            }
-        }
-    }
-    cout << endl;
-    cout << "Number of Nodes : " << vtxCount << " Number of Edges : " << vtxCount - 1 << endl;
 }
 
 void Graph::prim(int vtx) {
